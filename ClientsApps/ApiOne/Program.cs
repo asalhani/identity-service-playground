@@ -2,12 +2,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", config =>
-    {
-        config.Authority = "https://localhost:7220";
-        config.Audience = "ApiOne";
-    });
+builder.Services.AddAuthentication("Bearer").AddIdentityServerAuthentication("Bearer", options =>
+{
+    options.ApiName = "ApiOne"; // should match to name of one in configuration >> ApiResources
+    options.Authority = "https://localhost:7136";
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

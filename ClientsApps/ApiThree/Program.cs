@@ -9,7 +9,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAuthentication("Bearer").AddIdentityServerAuthentication("Bearer", options =>
 {
-    options.ApiName = "myApi";
+    options.ApiName = "ApiThree"; // should match to name of one in configuration >> ApiResources
     options.Authority = "https://localhost:7136";
 });
 

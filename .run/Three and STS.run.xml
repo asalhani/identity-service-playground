@@ -1,0 +1,7 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Three and STS" type="CompoundRunConfigurationType">
+    <toRun name="ApiThree" type="LaunchSettings" />
+    <toRun name="IdentityServerApp" type="LaunchSettings" />
+    <method v="2" />
+  </configuration>
+</component>

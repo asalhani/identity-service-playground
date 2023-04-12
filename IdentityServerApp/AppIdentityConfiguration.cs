@@ -40,10 +40,17 @@ public static class AppIdentityConfiguration
     public static IEnumerable<ApiResource> ApiResources =>
         new ApiResource[]
         {
-            new ApiResource("myApi")
+            new ApiResource("ApiOne")
             {
                 Scopes = new List<string>{ "api.read", "api.write" },
                 ApiSecrets = new List<Secret>{ new Secret("supersecret".Sha256()) }
+                
+            },
+            new ApiResource("ApiThree")
+            {
+                Scopes = new List<string>{ "api.read", "api.write" },
+                ApiSecrets = new List<Secret>{ new Secret("supersecret".Sha256()) }
+                
             }
         };
 
@@ -52,7 +59,15 @@ public static class AppIdentityConfiguration
         {
             new Client
             {
-                ClientId = "client",
+                ClientId = "svc_three_client",
+                ClientName = "Client Credentials Client",
+                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                ClientSecrets = { new Secret("secret".Sha256()) },
+                AllowedScopes = { "api.read" }
+            },
+            new Client
+            {
+                ClientId = "svc_two_client",
                 ClientName = "Client Credentials Client",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = { new Secret("secret".Sha256()) },

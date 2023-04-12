@@ -9,7 +9,7 @@ namespace ApiTwo.Controllers;
 public class HomeController : Controller
 {
     private readonly IHttpClientFactory _httpClientFactory;
-    private const string IdentityServerUrl = "https://localhost:7220";
+    private const string IdentityServerUrl = "https://localhost:7136";
     private const string ApiOneBaseUrl = "https://localhost:7003/api";
 
     public HomeController(IHttpClientFactory httpClientFactory)
@@ -26,9 +26,9 @@ public class HomeController : Controller
         var tokenResponse =  await serverClient.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest()
         {
             Address = discoveryDoc.TokenEndpoint,
-            ClientId = "client_id",
-            ClientSecret = "client_secret",
-            Scope = "ApiOne",
+            ClientId = "svc_two_client",
+            ClientSecret = "secret",
+            Scope = "api.read",
         });
         
         // call ApiOne secret endpoint
