@@ -1,4 +1,7 @@
-﻿namespace IdentityServerApp;
+﻿using System.Reflection;
+using Microsoft.EntityFrameworkCore;
+
+namespace IdentityServerApp;
 
 public class Startup
 {
@@ -14,19 +17,30 @@ public class Startup
         // services.AddRazorPages();
         services.AddControllers();
 
-        // services.AddIdentityServer()
-        //     .AddInMemoryApiResources(AppAppAppIdentityConfiguration.GetApis())
-        //     .AddInMemoryClients(AppAppAppIdentityConfiguration.GetClients())
-        //     .AddInMemoryApiScopes(AppAppAppIdentityConfiguration.GetScopes())
-        //     .AddDeveloperSigningCredential();
-        
+        var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+        const string connectionString = @"Server=localhost;Database=IdenittyServer;User Id=sa;Password=Aa123456;MultipleActiveResultSets=true;TrustServerCertificate=True";
+
         services.AddIdentityServer()
-            .AddInMemoryClients(AppIdentityConfiguration.Clients)
-            .AddInMemoryIdentityResources(AppIdentityConfiguration.IdentityResources)
-            .AddInMemoryApiResources(AppIdentityConfiguration.ApiResources)
-            .AddInMemoryApiScopes(AppIdentityConfiguration.ApiScopes)
             .AddTestUsers(AppIdentityConfiguration.TestUsers)
-            .AddDeveloperSigningCredential();
+            .AddDeveloperSigningCredential()
+            .AddConfigurationStore(options =>
+            {
+                options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+                    sql => sql.MigrationsAssembly(migrationsAssembly));
+            })
+            .AddOperationalStore(options =>
+            {
+                options.ConfigureDbContext = b => b.UseSqlServer(connectionString,
+                    sql => sql.MigrationsAssembly(migrationsAssembly));
+            });
+        
+        // services.AddIdentityServer()
+        //     .AddInMemoryClients(AppIdentityConfiguration.Clients)
+        //     .AddInMemoryIdentityResources(AppIdentityConfiguration.IdentityResources)
+        //     .AddInMemoryApiResources(AppIdentityConfiguration.ApiResources)
+        //     .AddInMemoryApiScopes(AppIdentityConfiguration.ApiScopes)
+        //     .AddTestUsers(AppIdentityConfiguration.TestUsers)
+        //     .AddDeveloperSigningCredential();
     }
 
     public void Configure(WebApplication app, IWebHostEnvironment env)
@@ -36,6 +50,7 @@ public class Startup
             app.UseExceptionHandler("/Error");
             app.UseHsts();
         }
+        app.UseItToSeedSqlServer();
         app.UseStaticFiles();
         app.UseRouting();
         app.UseEndpoints(endpoints =>
