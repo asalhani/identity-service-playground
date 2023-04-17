@@ -1,0 +1,8 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="STS + Admin UI" type="CompoundRunConfigurationType">
+    <toRun name="STS.Admin.Api" type="LaunchSettings" />
+    <toRun name="STS.Admin.Identity: STS.AspNetIdentity" type="LaunchSettings" />
+    <toRun name="STS.Admin.Ui: STS.Admin" type="LaunchSettings" />
+    <method v="2" />
+  </configuration>
+</component>

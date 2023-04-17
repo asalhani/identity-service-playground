@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "secrets1": {
+      "type": "secrets",
+      "connectionId": "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT"
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "IdentityDbConnection"
+    },
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "DataProtectionDbConnection"
+    },
+    "mssql3": {
+      "type": "mssql",
+      "connectionId": "PersistedGrantDbConnection"
+    },
+    "mssql4": {
+      "type": "mssql",
+      "connectionId": "ConfigurationDbConnection"
+    }
+  }
+}
