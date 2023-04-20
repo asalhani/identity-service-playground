@@ -24,6 +24,7 @@ namespace CompanyEmployees.OAuth
             services.AddIdentityServer()
                 .AddTestUsers(InMemoryConfig.GetUsers())
                 .AddDeveloperSigningCredential() //not something we want to use in a production environment;
+                .AddProfileService<CustomProfileService>()
                 .AddConfigurationStore(opt =>
                  {
                      opt.ConfigureDbContext = c => c.UseSqlServer(Configuration.GetConnectionString("sqlConnection"),

@@ -24,6 +24,7 @@ export class AuthService {
       post_logout_redirect_uri: `${Constants.clientRoot}/signout-callback`
     };
   }
+
   constructor() {
     this._userManager = new UserManager(this.idpSettings);
   }
@@ -35,7 +36,7 @@ export class AuthService {
    */
   public login = () => {
     return this._userManager.signinRedirect();
-  }
+  };
 
   public isAuthenticated = (): Promise<boolean> => {
     return this._userManager.getUser()
@@ -47,7 +48,7 @@ export class AuthService {
         this._user = user;
         return this.checkUser(user);
       });
-  }
+  };
 
   /*
   we need to complete the signin process because we don’t want to navigate the user to the Not Found page. To
@@ -64,24 +65,32 @@ export class AuthService {
         this._loginChangedSubject.next(this.checkUser(user));
         return user;
       });
-  }
+  };
 
   public getAccessToken = (): Promise<string> => {
     return this._userManager.getUser()
       .then(user => {
         return !!user && !user.expired ? user.access_token : null;
-      })
-  }
+      });
+  };
+
+  // check if current user has admin role
+  public checkIfUserIsAdmin = (): Promise<boolean> => {
+    return this._userManager.getUser()
+      .then(user => {
+        return user?.profile.role === 'Admin';
+      });
+  };
 
   public logout = () => {
     this._userManager.signoutRedirect();
-  }
+  };
   public finishLogout = () => {
     this._user = null;
     return this._userManager.signoutRedirectCallback();
-  }
+  };
 
   private checkUser = (user: User): boolean => {
     return !!user && !user.expired;
-  }
+  };
 }
