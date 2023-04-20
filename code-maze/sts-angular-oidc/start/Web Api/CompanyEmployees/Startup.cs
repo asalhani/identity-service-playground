@@ -35,8 +35,8 @@ namespace CompanyEmployees
                 .AddJwtBearer("Bearer", opt =>
                 {
                     opt.RequireHttpsMetadata = false;
-                    opt.Authority = "https://localhost:5005";
-                    opt.Audience = "companyApi";
+                    opt.Authority = "https://localhost:5005"; // IdSvc Base URL
+                    opt.Audience = "companyApi"; // Resource Name
                 });
 
             services.AddControllers();
