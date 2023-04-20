@@ -48,6 +48,32 @@ export class AuthService {
         return this.checkUser(user);
       });
   }
+
+  /*
+  we need to complete the signin process because we don’t want to navigate the user to the Not Found page. To
+  do that, we have to process the response from the /authorization endpoint and populate the user object with
+  the id and access tokens.
+
+  signinRedirectCallback() function that processes the response from the /authorization endpoint and returns a
+   promise.
+   */
+  public finishLogin = (): Promise<User> => {
+    return this._userManager.signinRedirectCallback()
+      .then(user => {
+        this._user = user;
+        this._loginChangedSubject.next(this.checkUser(user));
+        return user;
+      });
+  }
+
+  public logout = () => {
+    this._userManager.signoutRedirect();
+  }
+  public finishLogout = () => {
+    this._user = null;
+    return this._userManager.signoutRedirectCallback();
+  }
+
   private checkUser = (user: User): boolean => {
     return !!user && !user.expired;
   }
