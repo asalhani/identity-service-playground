@@ -9,7 +9,7 @@ import {AuthService} from '../shared/services/auth.service';
 export class MenuComponent implements OnInit {
 
   public isUserAuthenticated: boolean = false;
-  private isUserAdmin: boolean;
+  public isUserAdmin: boolean;
 
   constructor(private _authService: AuthService) { }
 

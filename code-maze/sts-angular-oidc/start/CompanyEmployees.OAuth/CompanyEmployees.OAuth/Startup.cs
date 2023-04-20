@@ -1,3 +1,4 @@
+using System;
 using CompanyEmployees.OAuth.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -21,7 +22,12 @@ namespace CompanyEmployees.OAuth
         {
             var migrationAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
-            services.AddIdentityServer()
+            services.AddIdentityServer(opt =>
+                {
+                    //  restrict the lifetime of a cookie so that after this time, the refresh token api will not work and the user has to login again
+                    // Now, our application will refresh our token several times every sixty seconds, but after the cookie’s lifetime expires, the user will be forced to log in again.
+                    opt.Authentication.CookieLifetime = TimeSpan.FromMinutes(4);
+                })
                 .AddTestUsers(InMemoryConfig.GetUsers())
                 .AddDeveloperSigningCredential() //not something we want to use in a production environment;
                 .AddProfileService<CustomProfileService>()
