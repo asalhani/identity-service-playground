@@ -1,0 +1,143 @@
+<aside class="site-sidebar">
+  <div class="top__logo">
+    <a href="/" title="{{appTitle}}">
+      <img class="logo-expand" style="width: 50%;" alt="" src="{{appLogo}}">
+      <h2 class="font-weight-bold text-custom1 mt-3">{{appTitle}}</h2>
+    </a>
+  </div>
+  <div class="flex-grow-1">
+    <ul class="nav side-menu">
+      <li class="nav-item thumb-sm">
+        <a class="nav-link" [routerLink]="['/portal']" [routerLinkActiveOptions]="{ exact: true }"
+          routerLinkActive="active">
+          <i class="fa fa-home"></i>
+          {{ 'Home Page' | translate }}
+        </a>
+      </li>
+      <li class="nav-item thumb-sm" *ngIf="hasPrivilege(appRoles.CENTER_ADMIN, appRoles.SYSTEM_ADMIN)">
+        <a class="nav-link" [routerLink]="['/portal/facility']" routerLinkActive="active">
+          <i class="fa fa-building"></i>
+          {{ 'Manage Facilities' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.FIELD_SUPPORT_MANAGER)">
+        <a class="nav-link" [routerLink]="['/portal/facility/closed-facility-list']" routerLinkActive="active">
+          <i class="fa fa-search-location"></i>
+          {{ 'Closed Facility List' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.SURVEYOR_MANAGER)">
+        <a class="nav-link" [routerLink]="['/portal/facility/cannot-inspect-facility-vists']" routerLinkActive="active">
+          <i class="fa fa-search-location"></i>
+          {{ 'Cannot Inspect Facility Visits' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.SYSTEM_ADMIN)">
+        <a class="nav-link" [routerLink]="['/portal/centers']" routerLinkActive="active">
+          <i class="fa far fa-map"></i>
+          {{ 'Manage Inspection Centers' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.SYSTEM_ADMIN)">
+        <a class="nav-link" [routerLink]="['/portal/penalties/categories']" routerLinkActive="active">
+          <i class="fa fa-list-alt"></i>
+          {{ 'Manage Inspection Items Categories' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.SYSTEM_ADMIN)">
+        <a class="nav-link" [routerLink]="['/portal/inspection-types']" routerLinkActive="active">
+          <i class="fa fa-layer-group"></i>
+          {{ 'Manage Inspection Types' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.SYSTEM_ADMIN)">
+        <a class="nav-link" [routerLink]="['/portal/penalties/inspection-items']" routerLinkActive="active">
+          <i class="fa fa-tasks"></i>
+          {{ 'Manage Inspection Items' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.SYSTEM_ADMIN)">
+        <a class="nav-link" [routerLink]="['/portal/penalties/violations']" routerLinkActive="active">
+          <i class="fa fa-exclamation-triangle"></i>
+          {{ 'Manage Violations' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.HELPDESK, appRoles.HELPDESKADMIN, appRoles.CENTER_ADMIN)">
+        <a class="nav-link" [routerLink]="['/portal/appeals']" routerLinkActive="active">
+          <i class="fa fa-phone"></i>
+          {{ 'Manage Appeals' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.SURVEYOR_MANAGER)">
+        <a class="nav-link" [routerLink]="['/portal/survey/list']" routerLinkActive="active">
+          <i class="fa fa-map-marker"></i>
+          {{ 'Manage Survey' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.HELPDESK, appRoles.EMERGENCY_MANAGER, appRoles.HELPDESKADMIN)">
+        <a class="nav-link" [routerLink]="['/portal/incidents']" routerLinkActive="active">
+          <i class="fa fa-bullhorn"></i>
+          {{ 'Manage Incidents' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.CENTER_ADMIN)">
+        <a class="nav-link" [routerLink]="['/portal/process']" routerLinkActive="active">
+          <i class="fa fa-clipboard"></i>
+          {{ 'Manage Inspection Process' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.INSPECTION_APPROVER_MANAGER)">
+        <a class="nav-link" [routerLink]="['/portal/process-reviews']" routerLinkActive="active">
+          <i class="fa fa-address-book"></i>
+          {{ 'Manage Inspection Reviews' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.FIELD_SUPPORT_MANAGER)">
+        <a class="nav-link" [routerLink]="['/portal/fieldsupport']" routerLinkActive="active">
+          <i class="fa fa-shield-alt"></i>
+          {{ 'Manage Field Support' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.FINANCE_ADMIN, appRoles.FINANCE_OFFICER)">
+        <a class="nav-link" [routerLink]="['/portal/payment']" routerLinkActive="active">
+          <i class="fa fa-money"></i>
+          {{ 'Manage Payment' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(appRoles.CENTER_ADMIN, appRoles.SYSTEM_ADMIN)">
+        <a class="nav-link" [routerLink]="['/portal/users']" routerLinkActive="active">
+          <i class="fa fa-users"></i>
+          {{ 'Manage Users' | translate }}
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="hasPrivilege(
+        appRoles.INSPECTOR,
+        appRoles.INSPECTION_APPROVER,
+        appRoles.FIELD_SUPPORTER,
+        appRoles.FIELD_SUPPORT_MANAGER,
+        appRoles.APPEAL_REVIEWER,
+        appRoles.SURVEYOR_MANAGER,
+        appRoles.SURVEYOR,
+        appRoles.EMERGENCY_MANAGER,
+        appRoles.APPEALCOMMITTEE,
+        appRoles.CLOSE_REVIEW_USER,
+        appRoles.EMERGENCY_INSPECTOR)">
+        <a class="nav-link" [routerLink]="['/portal/inbox']" routerLinkActive="active">
+          <i class="fa fa-envelope"></i>
+          {{ 'My Inbox' | translate }}
+          <span *ngIf="userInboxCount" class="badge badge-pill custom-badge">{{ userInboxCount }}</span>
+        </a>
+      </li>
+      <!-- <li class="nav-item" *ngIf="hasPrivilege(appRoles.SYSTEM_ADMIN)">
+        <a class="nav-link" [routerLink]="['/portal/entity']" routerLinkActive="active">
+          <i class="fa fa-cogs"></i>
+          {{ 'Manage Systems' | translate }}
+        </a>
+      </li> -->
+    </ul>
+  </div>
+
+  <a class="d-block m-4 text-center" href="/">
+    <img src="assets/images/momra-black-white.png" alt="MOMRA Logo">
+  </a>
+</aside>

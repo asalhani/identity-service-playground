@@ -1,0 +1,187 @@
+/*==============================================================
+4. Navigation Sidebar
+==============================================================*/
+//Hover State
+$stateHoverBorderColor: #c0c0c0;
+$stateHoverBgColor: #eeeeee;
+$stateHoverTextColor: #212121;
+
+@mixin hover-element() {
+    border-color: $stateHoverBorderColor;
+    background: $stateHoverBgColor;
+    color: $stateHoverTextColor;
+  
+    a {
+        color: $stateHoverTextColor;
+    }
+  }
+
+.ui-panelmenu {
+    width: auto;
+  }
+  
+  .ui-panelmenu .ui-menu-separator {
+    border-width: 1px 0 0 0;
+  }
+  
+  .ui-panelmenu .ui-panelmenu-content-wrapper {
+    overflow: hidden;
+  }
+  
+  .ui-panelmenu .ui-panelmenu-header {
+    margin: -1px 0 0 0;
+    zoom: 1;
+  }
+  
+  .ui-panelmenu .ui-panelmenu-header-link {
+    padding: .5em;
+    display: block;
+    text-decoration: none;
+
+    &.active{
+      background-color: #e7e7ec;
+      color: $custom1;
+    }
+  }
+  
+  .ui-panelmenu .ui-menuitem-icon {
+    margin-right: .25em;
+    float: right;
+    padding-top: 15px;
+    [dir='rtl'] & {
+        float: left;
+    }
+  }
+  
+  .ui-panelmenu .ui-panelmenu-content {
+    padding: 0.25em;
+    border-top: 0;
+    margin-bottom: 1px;
+  }
+ 
+
+
+
+
+
+
+  /* PanelMenu */
+.ui-panelmenu .ui-panelmenu-header.ui-state-active,
+.ui-panelmenu .ui-panelmenu-header.ui-state-active a {
+    border-color: #156090;
+    background: #186ba0;
+    color: #FFFFFF;
+}
+
+.ui-menuitem {
+    overflow: hidden;
+    .ui-menuitem-link {
+        display: block;
+        text-decoration: none;
+        &:hover {
+            @include hover-element();
+            border-color: transparent;
+        }
+    }
+  
+    &.ui-menuitem-active {
+        > .ui-menuitem-link {
+            @include hover-element();
+            color: $stateHoverTextColor;
+            border-color: transparent;
+        }
+    }
+  }
+
+
+
+
+
+
+
+//--------------- Theme ---------------------------//
+
+.ui-panelmenu {
+    .ui-submenu-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        margin-left: 0 !important;
+        background-color: #E7E7EC;
+      }
+  .ui-icon {
+    position: static;
+  }
+  .ui-panelmenu-header {
+    padding: 0;
+    > a {
+      color: $gray-700;
+      padding: 0.714em 0.857em;
+      position: static;
+      font-size: 1.1rem;
+      transition: background-color 0.2s;
+      .ui-panelmenu-icon {
+        float: left;
+        padding: 2px 7px;
+        transition: transform 0.3s;
+        font-family: 'Font Awesome 5 Pro' !important;
+        &.pi-caret-right:before {
+          content: "\f105";
+        }
+        &.pi-caret-down:before {
+          content: "\f107";
+        }
+      }
+    }
+    &:not(.ui-state-active) > a:hover {
+      outline: 0 none;
+      background-color: #e7e7ec;
+      color: $custom1;
+      .ui-panelmenu-icon {
+        
+      }
+    }
+    &.ui-state-active > a {
+      background-color: #e7e7ec;
+      color: $custom1;
+      /* font-weight: bold; */
+      .ui-panelmenu-icon {
+        transform: rotate(-180deg);
+      }
+      &:hover {
+        outline: 0 none;
+        .ui-panelmenu-icon {
+        }
+      }
+    }
+  }
+  .ui-panelmenu-panel {
+    margin-top: 2px;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  .ui-panelmenu-content {
+    padding: 0;
+    margin-top: 0;
+    position: static;
+    border-top: 0 none;
+    .ui-menuitem {
+      margin: 0;
+      .ui-menuitem-link {
+        padding: 10px 0 10px 2.5rem;
+        color: lighten( $gray-700, 10% );
+        font-size: 1rem;
+        
+        [dir="rtl"] & {
+          padding: 10px 2.5rem 10px 0;
+        }
+        &:hover, &.ui-state-active {
+          background-color: transparent;
+          color: $custom1;
+        }
+        
+      }
+    }
+  }
+}

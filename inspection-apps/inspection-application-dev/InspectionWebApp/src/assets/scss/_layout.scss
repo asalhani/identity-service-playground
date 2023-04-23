@@ -1,0 +1,124 @@
+.hamburger img {
+  width: 20px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+#sidebar {
+  width: 300px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1031;
+  transition: all 0.3s;
+  overflow-y: auto;
+
+  [dir="rtl"] & {
+    left: inherit;
+    right: 0;
+  }
+}
+
+#sidebar.active {
+  margin-left: -300px;
+  [dir="rtl"] & {
+    margin-left: inherit;
+    margin-right: -300px;
+  }
+}
+
+/* ---------------------------------------------------
+  CONTENT STYLE
+----------------------------------------------------- */
+header,
+footer {
+  width: calc(100% - 300px);
+  transition: all 0.3s;
+}
+
+header.active,
+footer.active {
+  width: 100%;
+}
+
+#content {
+  width: calc(100% - 300px);
+  padding: 40px;
+  min-height: calc(100vh - 55px);
+  transition: all 0.3s;
+  top: 0;
+  left: 0;
+  [dir="rtl"] & {
+    right: 0;
+    left: inherit;
+  }
+}
+
+#content.active {
+  width: 100%;
+}
+
+/* ---------------------------------------------------
+  MEDIAQUERIES
+----------------------------------------------------- */
+@include media-breakpoint-down(md) {
+  #sidebar {
+    margin-left: -300px;
+    [dir="rtl"] & {
+      margin-left: inherit;
+      margin-right: -300px;
+    }
+  }
+
+  #sidebar.active {
+    margin-left: 0;
+    [dir="rtl"] & {
+      margin-left: inherit;
+      margin-right: 0px;
+    }
+  }
+
+  #content,
+  header,
+  footer {
+    width: 100%;
+  }
+
+  #content.active,
+  header.active,
+  footer.active {
+    width: calc(100% - 300px);
+  }
+}
+
+.hamburger {
+  transition: transform 0.4s;
+}
+.menu-button-rotate{
+  transform: rotate(-180deg);
+}
+
+
+
+/* ---------------------------------------------------
+  Custom styles
+----------------------------------------------------- */
+
+.logo svg{
+  fill: currentColor
+}
+
+.elmLogo{
+  width: 65px;
+}
+
+
+.breadcrumb-item + .breadcrumb-item::before {
+  @extend .fa;
+  content: "\f105";
+}

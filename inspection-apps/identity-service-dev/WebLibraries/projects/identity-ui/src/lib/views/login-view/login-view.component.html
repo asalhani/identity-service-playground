@@ -1,0 +1,4 @@
+<idensrv-login-part *ngIf="!isOtpVisible && !isChangePasswordVisible" [returnUrl]="returnUrl" (commandEvent)="onCommandEvent($event)"></idensrv-login-part>
+<idensrv-otp-part *ngIf="isOtpVisible" [otpPartInput]="otpInput" (commandEvent)="onCommandEvent($event)"></idensrv-otp-part>
+<idensrv-change-password-part *ngIf="isChangePasswordVisible && !isOtpVisible" [mode]="changePasswordMode.ChangeExpiredPassword"
+  [token]="token" [loginName]="loginName" (commandEvent)="onCommandEvent($event)"></idensrv-change-password-part>

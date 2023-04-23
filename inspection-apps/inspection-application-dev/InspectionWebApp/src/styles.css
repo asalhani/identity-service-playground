@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+.display-4 {
+    font-size: 2.5rem;
+    color: #087bbe;
+  }
+  
+  .highlight:not(.djs-connection) .djs-visual > :nth-child(1) {
+    fill:lightskyblue !important; /* color elements as green */
+  }
+  
+  .bpmn-badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    border-radius: 10px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #70b8db;
+    border-color: #143d52;
+    color: #143d52;
+  }	
+  
+  .instance-count {
+    cursor: pointer;
+  }

@@ -1,0 +1,210 @@
+
+
+#wrapper{
+    background-color: rgba( $custom3, .06 );
+}
+
+.navbar, .footer {
+    background: linear-gradient(270deg, $custom1 0%, $custom2 100%);
+  }
+
+  ul.side-menu {
+
+    li.nav-item {
+      width: 100%;
+      border-bottom: 1px solid $layout-border-color;
+  
+      a {
+        &:hover {
+          color: $custom1;
+          background-color: rgba( $custom3, .06 );
+        }
+  
+        &.active,
+        &:focus {
+          background-color: rgba( $custom3, .06 );
+          color: $custom1;
+          [dir='ltr'] & {
+            border-left: 4px $custom3 solid
+          }
+          [dir='rtl'] & {
+            border-right: 4px $custom3 solid
+          }
+          
+        }
+      }
+    }
+  }
+
+
+  .ngx-datatable.bootstrap {
+
+    .datatable-header {
+      .datatable-header-cell {
+        background-color: rgba( $custom2, .06 );
+        border-bottom: 2px solid $custom3;
+      }
+    }
+  }
+
+  .custom-control-input:checked ~ .custom-control-label::before {
+    border-color: $custom3;
+}
+
+
+
+
+/* ========= Custom Table ====================================================================*/
+.table {
+  display: table;
+}
+
+.table__row {
+  display: table-row;
+}
+
+.table__column {
+  display: table-cell;
+  border-bottom: 1px solid $gray-100;
+  padding: .75rem 1rem;
+
+  .form-inline{
+    align-items: flex-start;
+  }
+}
+
+.table__header {
+  background-color: rgba( $custom2, .06 );
+  border-bottom: 2px solid $custom3;
+}
+
+
+
+/* .small-images{
+    display: flex;
+
+  .thumb{
+    width: 50px;
+    height: 50px;
+    border: 1px $gray-100 solid;
+    margin-left: 10px;
+
+    img{
+      width: 100%;
+      height: 100%;
+    }
+    &.plus{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: $gray-100;
+    }
+  }
+} */
+
+.itemEdit{
+  .form-control, .custom-select{
+    font-size: inherit;
+    height: 30px;
+    padding: 5px;
+  }
+}
+.small-images{
+  display: flex
+}
+
+.thumb-img img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: 100%;
+  width: auto;
+  transform: translate(-50%,-50%);
+  z-index: 1;
+}
+.thumb-img a{
+  display: flex;
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border: 1px $gray-100 solid;
+  margin-left: 10px;
+  overflow: hidden;
+
+  .img150 &{
+    width: 150px;
+  height: 150px;
+  }
+
+  &::before, &::after{
+    transition: all 0.3s;
+  }
+  &::before{
+    content: "";
+    right: 0;
+    position:absolute;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    z-index: 2;
+  }
+  &:hover::before{
+    background-color: rgba( $custom1, .7 );
+  }
+
+  &::after{
+    font-family: 'Font Awesome 5 Pro' !important;
+    content: "\f06e";
+    right: calc(50% - 15px);
+    top: calc(50% - 20px);
+    position:absolute;
+    font-size: 25px;
+    transform: scale(.1);
+    opacity: 0;
+    color: #FFF;
+    z-index: 3;
+  }
+  &:hover::after{
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.plus{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $gray-100;
+  width: 50px;
+  height: 50px;
+  border: 1px $gray-100 solid;
+}
+
+/* ========= Page Layout Footer ====================================================================*/
+
+.content__footer__action{
+  background-color: #FBFBFB;
+  @extend .d-flex, .justify-content-center, .mb-n5, .mx-n5, .mt-4, .p-3;
+
+  @include media-breakpoint-down(sm) {
+    flex-direction: column;
+
+    .btn{
+      margin: 5px 0 !important;
+    }
+  }
+}
+
+/* ========= by Abdullah Alotaibi ====================================================================*/
+.leaflet-draw-tooltip {
+  position: relative !important;
+}
+
+.leaflet-draw-section {
+  direction: ltr !important;
+}
+
+.nav-link .fa {
+  font-size: 1.2em;
+}
+/*==================================*/

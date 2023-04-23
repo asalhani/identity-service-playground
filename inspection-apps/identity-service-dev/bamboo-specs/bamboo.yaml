@@ -1,0 +1,81 @@
+---
+version: 2
+
+variables:
+  ServiceName: IdentityService
+  ComposeFile: .devops/docker-compose.yaml
+
+plan:
+  project-key: ISP
+  name: Identity Service
+  key: IDENTITYSERVICE
+
+stages:
+  - first-stage:
+      jobs:
+        - build-service-backend
+        - sonar-static-analysis
+  - second-stage:
+      jobs:
+        - build-service-docker-image
+
+build-service-backend:
+
+  tasks:
+    - clean
+    - script:
+      - curl https://nexus.elm.sa/repository/devops-releases/devops-releases/build-config-files/latest/.env > .env
+      - (echo '' ; printenv | grep bamboo_) >> .env
+      - COMPOSE_FILE=${bamboo.ComposeFile} docker-compose run --rm build sh .devops/buildServiceBackend.sh
+  artifacts:
+    - name: "serviceBuildArtifacts"
+      pattern: '*${bamboo.planRepository.branch}.${bamboo.buildNumber}.zip'
+      required: true
+      shared: true
+
+sonar-static-analysis:
+  tasks:
+    - script:
+      - cp .devops/.env .env;
+      - curl https://nexus.elm.sa/repository/devops-releases/devops-releases/build-config-files/latest/.env >> .env
+      - COMPOSE_FILE=${bamboo.ComposeFile} docker-compose run --rm sonar;
+  requirements:
+    - system.docker.executable
+
+build-service-docker-image:
+  tasks:
+    - script: sh .devops/buildServiceDockerImage.sh
+  requirements:
+    - system.docker.executable
+  artifacts:
+    - name: "serviceBuildInfo"
+      pattern: '${bamboo.ServiceName}.info'
+      required: true
+      shared: true
+
+---
+version: 2
+
+triggers: []
+
+plan:
+  project-key: ISP
+  name: Identity Service UI
+  key: IDENTITYSERVICEUI
+
+variables:
+  ComposeFile: .devops/docker-compose.yaml
+stages:
+  - first-stage:
+      jobs: 
+        - build-publish-service-frontend-ui
+
+build-publish-service-frontend-ui:
+  tasks:
+    - script:
+      - curl https://nexus.elm.sa/repository/devops-releases/devops-releases/build-config-files/latest/.env > .env
+      - (echo '' ; printenv | grep bamboo_) >> .env
+      - export COMPOSE_FILE=${bamboo.ComposeFile}
+      - docker-compose run --rm build-ui sh .devops/buildServiceFrontendUI.sh
+      - docker-compose run --rm build-ui sh .devops/publishServiceFrontendUI.sh
+

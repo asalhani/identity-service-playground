@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+
+  build: &base
+    image: nexus.elm.sa/elm-core/dotnetcore:2.2-7z-16.02-node10.16.0-core0.3.8
+    volumes:
+    - ../:/data
+    working_dir: /data
+    env_file:
+    - ../.env
+
+  build-ui:
+    <<: *base
+    image: nexus.elm.sa/elm-core/node:8.11-alpine-ng7.2.3-core${BUILDER_IMAGE_TAG_NODE}
+
+  sonar:
+    image: nexus.elm.sa/elm-core/dotnetcore:2.2-alpine3.9-sonarscanner-4.6.2-corev1.0.0
+    restart: 'no'
+    volumes:
+    - ../:/data
+    working_dir: /data
+  #  entrypoint: ["bash", "-c"] # Uncomment to interact with the container
+    environment:
+    - SONAR_HOST_URL=${bamboo_sonar_host_url}
+    - SONAR_USER=${bamboo_sonar_user}
+    - SONAR_PASSWORD=${bamboo_sonar_password}
+    - NUGET_REPO=${bamboo_nuget_repo}
+    command: 
+    - --projectkey=${PROJECT_KEY}
+    - --projectname=${PROJECT_NAME}
+    - -sln=${SLN_FILE}
+    - --buildnumber=${bamboo_buildNumber}

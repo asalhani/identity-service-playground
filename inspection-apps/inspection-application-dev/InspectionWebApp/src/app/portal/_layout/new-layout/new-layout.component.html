@@ -1,0 +1,37 @@
+<div id="wrapper">
+  <!-- HEADER & TOP NAVIGATION -->
+  <new-header></new-header>
+  <div class="content-wrapper">
+    <!-- SIDEBAR -->
+    <app-new-nav></app-new-nav>
+    <!-- CONTENT (ROUTER OUTLET) -->
+    <main class="d-flex flex-column main-wrapper wrapper-5vh">
+      <div class="page-title flex-center px-4 pt-4 mb-4">
+        <div>
+          <small class="text-black-50">
+            <span *ngIf="appTitle.title">{{ appTitle.title }}</span>
+            <span *ngIf="appTitle.breadcrumbTitle"> / {{ appTitle.breadcrumbTitle }}</span>
+            <span *ngIf="appTitle.breadcrumbTitleLvl2"> / {{ appTitle.breadcrumbTitleLvl2 }}</span>
+          </small>
+          <h2 class="font-weight-bold text-custom1 mt-2">
+            {{ appTitle.breadcrumbTitleLvl2 || appTitle.breadcrumbTitle || appTitle.title }}</h2>
+        </div>
+
+        <!-- <a class="d-flex">
+          <span class="mr-2">
+            <small> {{ 'need to' | translate }} </small>
+            <span class="d-block mt-n2">{{ 'help' | translate }}</span>
+          </span>
+          <i class="fal fa-lightbulb lightbulb"></i>
+        </a> -->
+      </div>
+      <div class="flex-grow-1 mx-4">
+        <router-outlet #o="outlet"></router-outlet>
+      </div>
+      <!-- FOOTER -->
+      <footer class="footer small text-center px-4 py-3">
+        {{ 'copyright' | translate }}
+      </footer>
+    </main>
+  </div>
+</div>

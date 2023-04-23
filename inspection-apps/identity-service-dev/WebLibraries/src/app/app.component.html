@@ -1,0 +1,11 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center; position: absolute; z-index: 99999; color: white">
+  <h1>
+    {{'Welcome to'|translate}} {{ title }}!
+  </h1>
+  <a routerLink="/protected" style="color:white">{{'Go to'|translate}} '/protected' {{'page'|translate}}</a><br />
+  <a routerLink="/" style="color:white">{{'Go to'|translate}} '/' {{'page'|translate}}</a><br />
+  <button (click)="callSecureAPI()">{{'Call Secure API'|translate}}</button><br />
+  <button (click)="signout()">{{'Sign Out'|translate}}</button>
+</div>
+<router-outlet></router-outlet>

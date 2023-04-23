@@ -1,0 +1,9 @@
+{
+  "env": "prod",
+  "recaptchaSiteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+  "identityServerEndpoint": "/identityservice",
+  "captchaType":"Custom",
+
+  "AppTitle":"تفتيش أمانة الرياض",
+  "AppLogo":"assets/images/ruh.svg"
+}

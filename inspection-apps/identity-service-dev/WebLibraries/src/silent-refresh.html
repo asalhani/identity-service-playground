@@ -1,0 +1,13 @@
+<head>
+    <title></title>
+    <script src="oidc-client.min.js"></script>
+</head>
+<body>
+<script>
+    Oidc.Log.logger = console;
+    new Oidc.UserManager().signinSilentCallback()
+        .catch((err) => {
+            console.log(err);
+        });
+</script>
+</body>

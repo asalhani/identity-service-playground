@@ -1,0 +1,152 @@
+
+
+ .ngx-datatable.bootstrap {
+  box-shadow: none;
+  .datatable-header {
+    height: unset !important;
+    .datatable-header-cell {
+      vertical-align: bottom;
+      padding: 0.75rem;
+      background-color: rgba( $custom3, .06 ) !important;
+      border-bottom: 2px solid $custom1;
+      .datatable-header-cell-label {
+          font-weight: bold;
+          color: $custom1
+      }
+    }
+  }
+  .datatable-body {
+    .datatable-body-row {
+      padding: 0.75rem;
+      vertical-align: top;
+      border-top: 1px solid #e8e8e8;
+      &:hover{
+        background-color: rgba( $custom3, .06 );
+      }
+      &.active {
+        background-color: $custom1;
+        color: #FFF;
+      }
+      .datatable-body-cell {
+        text-align: left;
+        vertical-align: top;
+        display: inline-table;
+        [dir='rtl'] & {
+          text-align: right;
+        }
+      }
+    }
+  }
+  .datatable-footer {
+    
+      .datatable-footer-inner{
+          flex-direction: row-reverse;
+      }
+    .page-count {
+      line-height: 50px;
+      color: #666;
+      text-align: right;
+      [dir='rtl'] & {
+        text-align: left;
+      }
+    }
+    .datatable-pager {
+      margin: 0 10px;
+      vertical-align: top;
+      text-align: left;
+      font-size: 15px;
+      [dir='rtl'] & {
+        text-align: right;
+      }
+      ul {
+        li {
+          margin: 10px 0px;
+          &.disabled{
+              i{
+                  color: #ccc
+              }
+          }
+          &:not(.disabled) {
+
+            &.active {
+              a {
+                background-color: $custom1;
+                color: #d1d4d7
+                
+              }
+            }
+            &:hover:not(.active) {
+              a {
+                background-color: $light;
+                
+              }
+            }
+          }
+          &:not(.pages) {
+              a {
+                  background-color: $light;
+                  
+                }
+          }
+        }
+      }
+      a {
+          margin: 0 3px;
+          text-align: center;
+
+          border-radius: 50%;
+                width: 30px;
+  height: 30px;
+  line-height: 30px;
+  color: #666;
+
+      }
+      i{
+          font-style: unset;
+      }
+      
+    }
+  }
+}
+
+.datatable-icon-left::before,
+.datatable-icon-skip::before,
+.datatable-icon-right::before,
+.datatable-icon-prev::before,
+.datatable-icon-up::before,
+.datatable-icon-down::before {
+  font-family: 'Font Awesome 5 Pro';
+}
+.datatable-icon-left::before{
+  content: '\f104';
+  [dir='rtl'] & {
+    content: '\f105';
+  }
+}
+.datatable-icon-skip::before{
+  content: '\f101';
+  [dir='rtl'] & {
+    content: '\f100';
+  }
+}
+.datatable-icon-right::before{
+content: '\f105';
+[dir='rtl'] & {
+content: '\f104';
+}
+}
+.datatable-icon-prev::before {
+  content: '\f100';
+  [dir='rtl'] & {
+    content: '\f101';
+  }
+}
+.datatable-icon-up::before {
+  content: '\f0d8';
+  padding: 0 7px;
+}
+.datatable-icon-down::before {
+  content: '\f0d7';
+  padding: 0 7px;
+}
+

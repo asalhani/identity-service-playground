@@ -1,0 +1,136 @@
+@import "_mixins/font-face";
+
+@import 'variables';
+// Required
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@import 'theme';
+@import '~bootstrap/scss/bootstrap';
+@import "rtl";
+@import 'functions';
+/* =============================================================================
+    Fortawesome
+================================================================================*/
+$fa-font-path: "../fonts/fontawesome/";
+.fa,
+.far,
+.fal {
+    font-family: 'Font Awesome 5 Pro';
+    font-weight: 400;
+}
+
+@import "_fontawesome/fontawesome";
+@import "_fontawesome/light";
+
+/* =============================================================================*/
+
+
+@import "fonts";
+/* @import "layout"; */
+@import "new-layout";
+@import "sidenav";
+@import "login";
+@import "form";
+@import "pages";
+@import "form-io";
+@import "datatable";
+@import "wizard";
+
+/* ========= Custom For MOMRA ====================================================================*/
+@import "momra";
+
+
+::placeholder {
+  color: #9B9B9B;
+}
+
+::selection {
+  background-color: $cyan;
+  color: #fff;
+}
+
+a {
+  transition: all 0.3s;
+  color: $custom1;
+
+  &:hover{
+    color: darken( $custom1, 10% );
+  }
+}
+
+.transition {
+  transition: all 0.3s;
+}
+
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  font-size: 16px;
+  @include media-breakpoint-down(lg) {
+    font-size: 15px;
+  }
+  @include media-breakpoint-down(md) {
+    font-size: 14px;
+  }
+  @include media-breakpoint-down(sm) {
+    font-size: 13px;
+  }
+}
+
+body {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+
+.font-weight-bold {
+  font-family: $arabic-font
+}
+
+
+.height-100vh {
+  height: 100vh
+}
+
+.flex-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.rounded-22 {
+  border-radius: 22px
+}
+
+.btn-mb .btn {
+  margin-bottom: 10px;
+
+  @include media-breakpoint-down(md) {
+    width: 100%;
+  }
+
+}
+
+/* Thumbnail Image Sizes
+=======================*/
+[class*="thumb"] {
+  display: inline-block;
+}
+
+img {
+  .thumb-sm & {
+    @include size(55px)
+  }
+
+  .thumb-md & {
+    @include size(110px)
+  }
+
+  .thumb-lg & {
+    @include size(180px)
+  }
+}

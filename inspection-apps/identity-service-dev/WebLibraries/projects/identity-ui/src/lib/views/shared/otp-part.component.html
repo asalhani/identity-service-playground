@@ -1,0 +1,69 @@
+
+<div class="login__bg d-flex justify-content-center">
+  <div class="login__width">
+    <div class="pt-6 pb-5 position-relative">
+      <div [title]="tenantName">
+        <img class="logo-expand img-fluid" style="max-height:150px;" alt="" [src]="tenantLogoUrl">
+        <h2 class="font-weight-bold text-custom1 mt-3">{{tenantName}}</h2>
+      </div>
+    </div>
+    <div class="login__wrapper">
+      <div class="login__header">
+        <h2 class="text-custom1 py-4">{{'One Time Password'|translate}}</h2>
+      </div>
+      <div class="login__body">
+        <form #otpForm="ngForm" (ngSubmit)="onSubmit(otpForm)">
+          <div *ngIf="this.timeoutTimer" class="alert alert-info">
+            <span>
+              {{'An SMS with a confirmation number has been sent to'|translate}}:
+              05xxxx{{otpPartInput.mobileNumberFraction}}
+            </span>
+          </div>
+          <div class="form-group">
+            <div class="alert alert-danger" *ngIf="showTrialTimeout()">
+              {{'Your trial is timed-out.'|translate}}
+            </div>
+            <div class="alert alert-danger" *ngIf="isResendFailed">
+              {{errorMsg}}
+            </div>
+            <div *ngIf="verificationResult && otpForm.submitted && !verificationResult.success">
+              <div class="alert alert-danger" *ngIf="verificationResult.isInvalidOtp">
+                {{'Invalid confirmation number'|translate}}
+              </div>
+              <div class="alert alert-danger" *ngIf="verificationResult.isAccountLocked">
+                {{'The user is locked, please confirm with the system administrator'|translate}}
+              </div>
+            </div>
+            <div *ngIf="this.timeoutTimer">
+              <label>{{'Confirmation Number'|translate}}</label>
+              <input type="text" class="form-control" autocomplete="off" required #otpNumber="ngModel"
+                [(ngModel)]="otpInfo.otpValue" name="otpNumber" maxlength="6">
+              <span class="text-danger" *ngIf="!otpNumber.valid && otpForm.submitted">
+                {{'A confirmation number is required'|translate}}
+              </span>
+            </div>
+          </div>
+          <div *ngIf="this.timeoutTimer" class="form-group">
+            {{remainingSeconds}} {{'seconds remaining to enter the confirmation number.'|translate}}
+          </div>
+
+          <button *ngIf="this.timeoutTimer" type="submit" class="btn btn-custom1 my-4 px-5 rounded-22"
+            [disabled]="disableSubmit()">{{'Submit'|translate}}</button>
+          <a class="btn btn-outline-secondary my-4 ml-3 px-5 rounded-22"
+            [routerLink]="['/login']" queryParamsHandling="preserve">{{'Cancel'|translate}}</a>
+          <button *ngIf="this.timeoutTimer" type="button" class="btn btn-outline-custom1 rounded-22 my-4 px-5 ml-3" [disabled]="disableResend()"
+            (click)="resendOTP()">
+            {{'Resend OTP'|translate}} <small [hidden]="!disableResend()">{{remainingSecondsForResend}}</small>
+          </button>
+          <!-- <span class="badge badge-pill alert-info px-3 ml-3" [hidden]="!disableResend()">{{'Resend OTP'|translate}}
+            </span> -->
+        </form>
+      </div>
+      <div class="login__footer py-6 py-lg-4">
+        <span title="وزارة الشؤون البلدية والقروية">
+          <img src="assets/images/Momra.png" alt="">
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

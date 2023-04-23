@@ -1,0 +1,166 @@
+.login__bg {
+  text-align: center;
+  background-image: url("../images/login-bg.jpg");
+  background-repeat: repeat-x;
+  background-position: bottom;
+  min-height: 100vh;
+}
+
+.login__width{
+
+  @include media-breakpoint-up(md) {
+    width: 415px;
+  }
+}
+
+
+.login__wrapper, .login__footer {
+  
+  @include media-breakpoint-up(lg) {
+    background-color: rgba( $custom3, .06 );
+  }
+}
+
+.login__header{
+  @include media-breakpoint-down(md) {
+    text-align: right;
+  }
+}
+
+
+
+
+
+.popover {
+  text-align: right;
+  font-family: "Elm-font", serif;
+  max-width: 370px;
+  border: 0;
+  margin-right: 15px;
+  @extend .bg-light,
+  .shadow,
+  .border-0;
+}
+
+.mrg25 {
+  margin-left: -20px;
+
+  [dir='rtl'] & {
+    margin-left: unset;
+    margin-right: -20px;
+  }
+}
+
+.popover-title {
+  @extend .swatch-custom1,
+  .h4,
+  .p-3,
+  .mb-3;
+}
+
+.popover .arrow {
+  width: 0px;
+  height: 0px;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-left: 15px solid #F0F0F0;
+  right: -14px;
+  top: calc(50% - 20px);
+  margin: unset !important;
+
+}
+
+hr.popupdevider {
+  height: 20px;
+  border: 0;
+  margin-bottom: 0;
+  background: linear-gradient(to top, $white 0%, $light 100%);
+}
+
+
+
+.ha {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  width: 1em;
+  height: 1em;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.ha-refresh{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='1200' height='1200'%3E%3Csvg fill='%2300635F' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 64' transform='matrix(.69 0 0 .69 186 186)'%3E%3Cpath d='M29.684 10.371A23.706 23.706 0 0 1 40 8c13.234 0 24 10.766 24 24h-8l12 14 12-14h-8C72 14.327 57.673 0 40 0a31.814 31.814 0 0 0-16.246 4.441l5.93 5.93zM50.316 53.629A23.703 23.703 0 0 1 40 56c-13.234 0-24-10.766-24-24h8L12 18 0 32h8c0 17.673 14.327 32 32 32a31.817 31.817 0 0 0 16.246-4.441l-5.93-5.93z'/%3E%3C/svg%3E%3C/svg%3E");
+}
+.ha-password{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' %3E%3Csvg fill='%2300635F' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' transform='matrix(.69 0 0 .69 186 186)'%3E%3Cpath d='M81.097 38.886h6.539L87.632 100H12.358l.004-61.114H69.06M35.556 57.844l-3.291 5.642 10.271 5.962-10.271 5.919 3.291 5.678L45.8 75.153v11.843h6.583V75.153l10.271 5.891 3.291-5.678-10.271-5.919 10.271-5.962-3.291-5.642-10.244 5.892V51.893H45.8v11.843l-10.244-5.892z'/%3E%3Cpath d='M81.097 50.879H69.104V31.033c0-10.498-8.569-19.038-19.106-19.038s-19.106 8.54-19.106 19.038v19.846H18.897V31.033c0-17.111 13.953-31.031 31.1-31.031s31.1 13.92 31.1 31.031v19.846z'/%3E%3C/svg%3E%3C/svg%3E");
+}
+.ha-user{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' %3E%3Csvg fill='%2300635F' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' transform='matrix(.69 0 0 .69 186 186)'%3E%3Cpath d='M87.4 85.5c0-20.8-13.3-32.3-37.4-32.3S12.6 64.7 12.6 85.5v4h74.9v-4zM50 9.3c-11.4 0-20 8.8-20 20.4 0 11.9 9 21.6 20 21.6s20-9.7 20-21.6c0-11.6-8.6-20.4-20-20.4z'/%3E%3C/svg%3E%3C/svg%3E");
+}
+.ha-key{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' %3E%3Csvg fill='%2300635F' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' transform='matrix(.69 0 0 .69 186 186)'%3E%3Cpath d='M41.7 37.5c0-6.9-5.6-12.5-12.5-12.5h-8.3C14 25 8.4 30.6 8.4 37.5v16.7c0 6.9 5.6 12.5 12.5 12.5h8.3c6.9 0 12.5-5.6 12.5-12.5V50h25v16.7H75V50h8.3v16.7h8.3v-25h-50v-4.2zm-8.4 16.7c0 2.3-1.9 4.2-4.2 4.2h-8.3c-2.3 0-4.2-1.9-4.2-4.2V37.5c0-2.3 1.9-4.2 4.2-4.2h8.3c2.3 0 4.2 1.9 4.2 4.2v16.7z'/%3E%3C/svg%3E%3C/svg%3E");
+}
+
+
+
+.login__body{
+
+  @include media-breakpoint-up(lg) {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  }
+
+  .input-group-prepend, .input-group-append{
+    position: absolute;
+    z-index: 3;
+  }
+  .input-group-append{
+    left: 0;
+    height: 3em;
+
+    .btn-light:not(:hover){
+      background-color: transparent;
+      margin: 1px 0;
+    }
+  }
+  .input-group-text{
+    border: 0;
+    background-color: transparent;
+    display: flex;
+    padding-top: 15px;
+  }
+
+  .input-group-prepend ~ .form-control{
+    height: 3rem;
+    padding-right: 2.2rem;
+    background-color: #FFF;
+    border-radius: 0 !important;
+
+    @include media-breakpoint-down(md) {
+      background-color: rgba( $custom1, .06 );
+      border: 0;
+      border-radius: 8px !important;
+    }
+  }
+}
+
+.login__req-msg{
+  /* text-danger pt-1 small w-100 text-left; */
+  text-align: right;
+  width: 100%;
+  font-size: small;
+  color: $danger;
+}
+
+
+
+
+
+
+

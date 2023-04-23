@@ -1,0 +1,98 @@
+<div class="login__bg d-flex justify-content-center">
+  <div class="login__width">
+    <div class="pt-6 pb-5 position-relative">
+      <div [title]="tenantName">
+        <img class="logo-expand img-fluid" style="max-height:150px;" alt="" [src]="tenantLogoUrl">
+        <h2 class="font-weight-bold text-custom1 mt-3">{{tenantName}}</h2>
+      </div>
+    </div>
+
+    <div class="login__wrapper">
+      <div class="login__header">
+        <h2 class="text-custom1 py-4">تسجيل الدخول</h2>
+      </div>
+
+      <div class="login__body">
+        <div class="form-group" *ngIf="!loginResult?.success">
+          <div *ngIf="loginResult?.isAccountLocked" class="alert alert-danger mb-0">
+            <i class="fa fa-1x fa-exclamation-triangle"></i>
+            {{'The user is locked, please confirm with the system administrator'|translate}}
+          </div>
+          <div *ngIf="loginResult?.isInvalidUserInfo" class="alert alert-danger mb-0">
+            <i class="fa fa-1x fa-exclamation-triangle"></i>
+            {{'Invalid user name or password'|translate}}
+          </div>
+          <div *ngIf="loginResult?.isInvalidCaptcha" class="alert alert-danger mb-0">
+            <i class="fa fa-1x fa-exclamation-triangle"></i>
+            {{'Invalid captcha'|translate}}
+          </div>
+        </div>
+
+        <form novalidate #loginForm="ngForm" (ngSubmit)="login(loginForm.valid)">
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="ha ha-user"></i></div>
+            </div>
+            <input class="form-control" type="email" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"
+              autocomplete="off" placeholder="{{'Enter your email'|translate}}" name="loginName" required
+              [(ngModel)]="loginData.loginName" #loginName="ngModel">
+            <small class="text-danger pt-1 text-left w-100" *ngIf="!loginName.valid && loginForm.submitted">
+              {{'Please enter a valid email address'|translate}}</small>
+          </div>
+
+
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text"><i class="ha ha-password"></i></div>
+            </div>
+            <input class="form-control" type="password" autocomplete="off" placeholder="كلمة المرور" name="password"
+              maxlength="128" required [(ngModel)]="loginData.password" #password="ngModel">
+            <small class="text-danger pt-1 text-left w-100" *ngIf="!password.valid && loginForm.submitted">
+              {{'Password is required'|translate}}</small>
+          </div>
+
+
+          <div class="form-group" *ngIf="captchaType === 'Google'">
+            <div [class.error-box]="!loginData.captchaString && loginForm.submitted">
+              <ngx-recaptcha2 name="captchaString" [(ngModel)]="loginData.captchaString" #captchaStringControl="ngModel"
+                required (resolved)="captchaResolved($event)" siteKey="{{captchaSiteKey}}"></ngx-recaptcha2>
+              <span class="text-danger" *ngIf="!loginData.captchaString && loginForm.submitted">
+                {{'You have to complete this challenge'|translate}}</span>
+            </div>
+          </div>
+
+
+          <div class="form-group input-group" *ngIf="captchaType != 'Google'">
+            <span class="input-group-prepend">
+              <div class="input-group-text"><i class="ha ha-key"></i></div>
+            </span>
+
+            <input type="text" class="form-control" name="captcha" placeholder="رمز التحقق" autocomplete="off"
+              maxlength="12" required [(ngModel)]="loginData.captchaString" #captcha="ngModel" />
+
+
+            <span class="input-group-append">
+              <img id="img-captcha" [src]="imageToShow">
+              <button class="btn btn-light pt-2 pb-0" type="button" id="button-addon1" (click)="loadCaptcha()"><i
+                  class="ha ha-refresh"></i></button>
+            </span>
+
+            <small class="text-danger pt-1 text-left w-100" *ngIf="!captcha.valid && loginForm.submitted">
+              {{'Captcha is required'|translate}}</small>
+          </div>
+
+
+          <div class="mt-4">
+            <button type="submit" class="btn btn-success btn-block">{{'Sign in'|translate}}</button>
+            <a class="d-block py-lg-3 pt-5" routerLink="../forgot-password" queryParamsHandling="preserve">{{'Forgot password'|translate}}؟</a>
+          </div>
+        </form>
+      </div>
+      <div class="login__footer py-6 py-lg-4">
+        <span title="وزارة الشؤون البلدية والقروية">
+          <img src="assets/images/Momra.png" alt="">
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

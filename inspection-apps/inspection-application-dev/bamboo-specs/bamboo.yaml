@@ -1,0 +1,52 @@
+---
+version: 2
+
+variables:
+  ServiceName: InspectionWebApp
+
+plan:
+  project-key: ISP
+  name: Inspection Web Application
+  key: INSPECTIONWEBAPPLICATION
+
+stages:
+  - first-stage:
+      jobs:
+        - build-service-frontend-ui
+  - second-stage:
+      jobs:
+        - build-service-docker-image
+
+build-service-frontend-ui:
+  tasks:
+    - clean
+    - script:
+      - curl https://nexus.elm.sa/repository/devops-releases/devops-releases/build-config-files/latest/.env > .env
+      - (echo '' ; printenv | grep bamboo_) >> .env
+      - export COMPOSE_FILE=.devops/docker-compose.yaml
+      - docker-compose run --rm build-ui sh .devops/buildServiceFrontendUI.sh
+#      - docker-compose run --rm build-ui sh .devops/publishServiceFrontendUI.sh
+  artifacts:
+    - name: "serviceBuildArtifacts"
+      pattern: '*${bamboo.planRepository.branch}.${bamboo.buildNumber}.zip'
+      required: true
+      shared: true
+    - name: "serviceDistFolder"
+      pattern: 'serviceDistFolder'
+      required: false
+      shared: true
+
+build-service-docker-image:
+  tasks:
+    - artifact-download:
+        source-plan: ISP-INSPECTIONWEBAPPLICATION
+        artifacts:
+           - name: serviceDistFolder
+    - script: sh .devops/buildServiceDockerImage.sh
+  requirements:
+    - system.docker.executable
+  artifacts:
+    - name: "serviceBuildInfo"
+      pattern: '${bamboo.ServiceName}.info'
+      required: true
+      shared: true

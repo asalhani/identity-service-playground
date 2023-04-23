@@ -1,0 +1,410 @@
+/*------------------------------------------------------------------------------------
+  Fontawesome Icons
+  ------------------------------------------------------------------------------------*/
+
+  
+
+
+  table.table {
+    .choices__list--dropdown {
+      white-space: nowrap !important;
+      width: auto;
+    }
+
+    .choices__list--dropdown .choices__item--selectable {
+      padding-left: 20px !important;
+    }
+
+    .formio-component-file {
+
+      .list-group {
+
+        [dir='rtl'] & {
+          padding-left: 0;
+        }
+      }
+
+    }
+  }
+
+/*------------------------------------------------------------------------------------*/
+
+.formio-form {
+
+  /*------------------------------------------------------------------------------------
+  Buttons
+  ------------------------------------------------------------------------------------*/
+
+  .formio-component-button {
+    @extend .text-right;
+  }
+
+  .formio-button-remove-row {
+    @extend .btn-outline-danger,
+    .border-0;
+    background-color: transparent;
+
+    .fa-times-circle-o:before {
+      content: "\f2ed";
+    }
+  }
+
+  .formio-component-button button,
+  .list-inline-item button {
+    @extend .rounded-22,
+    .px-5;
+  }
+
+  .btn-wizard-nav-next,
+  .formio-component-submit button,
+  .btn-wizard-nav-submit {
+    @extend .btn-custom1;
+  }
+
+  .btn-wizard-nav-previous,
+  .formio-button-add-row {
+    @extend .btn-outline-custom1,
+    .rounded-22,
+    .px-3;
+    background-color: transparent;
+    i{
+      @extend .mr-1;
+    }
+  }
+
+  .btn-wizard-nav-cancel {
+    @extend .btn-outline-secondary;
+    background-color: transparent;
+  }
+
+
+  /*------------------------------------------------------------------------------------
+  Table
+  ------------------------------------------------------------------------------------*/
+  .formio-data-grid {
+
+    &.table-bordered {
+      border: 0;
+
+      td {
+        border-width: 1px 0 0 0;
+      }
+    }
+
+
+    thead th {
+      vertical-align: bottom;
+      padding: 0.75rem;
+      background-color: rgba( $custom3, .06 );
+      border-bottom: 2px solid $custom1;
+    }
+  }
+
+  /*------------------------------------------------------------------------------------
+  Custom Wizard
+  ------------------------------------------------------------------------------------*/
+
+  nav {
+
+    .pagination {
+      display: flex;
+      flex-wrap: wrap;
+      padding-left: 0;
+      margin-bottom: 0;
+      list-style: none;
+    }
+
+    .page-item {
+      position: relative;
+      flex-basis: 0;
+      flex-grow: 1;
+      text-align: center;
+
+      &::after {
+        content: '';
+        width: 50%;
+        height: 2px;
+        background: $custom1;
+        display: block;
+        position: absolute;
+        top: 52px;
+        z-index: 0;
+
+
+        [dir='ltr'] & {
+          right: 0;
+        }
+
+        [dir='rtl'] & {
+          left: 0;
+        }
+      }
+
+      &::before {
+        content: '';
+        width: 50%;
+        height: 2px;
+        background: $custom1;
+        display: block;
+        position: absolute;
+        top: 52px;
+        z-index: 0;
+
+        [dir='ltr'] & {
+          left: 0;
+        }
+
+        [dir='rtl'] & {
+          right: 0;
+        }
+      }
+
+      &:first-child {
+        &::before {
+          display: none
+        }
+      }
+
+      &:last-child {
+        &::after {
+          display: none
+        }
+      }
+
+      &.active {
+        &::after {
+          background: #E9E9E9;
+        }
+
+        .page-link {
+          z-index: unset;
+          color: $custom1;
+          background-color: unset;
+          border-color: unset;
+
+
+          &::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35'%3E%3Cpath fill='#{rgba( $custom1, .999 )}' d='M17.5 10c4.14 0 7.5 3.36 7.5 7.5S21.64 25 17.5 25 10 21.64 10 17.5s3.36-7.5 7.5-7.5m0-10C7.84 0 0 7.84 0 17.5S7.84 35 17.5 35 35 27.16 35 17.5 27.16 0 17.5 0z'/%3E%3C/svg%3E");
+          }
+
+        }
+      }
+
+    }
+
+    .page-item.active~.page-item {
+      &::after {
+        background: #E9E9E9;
+      }
+
+      &::before {
+        background: #E9E9E9;
+      }
+
+      .page-link {
+        color: #999;
+
+        &::before {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35'%3E%3Cpath fill='%23E9E9E9' d='M17.5 10c4.14 0 7.5 3.36 7.5 7.5S21.64 25 17.5 25 10 21.64 10 17.5s3.36-7.5 7.5-7.5m0-10C7.84 0 0 7.84 0 17.5S7.84 35 17.5 35 35 27.16 35 17.5 27.16 0 17.5 0z'/%3E%3C/svg%3E");
+        }
+
+      }
+    }
+
+    .page-link {
+      padding: 80px 0 20px;
+      color: #3F2986;
+      position: unset;
+      border: unset;
+      background: none;
+
+      &::before {
+        content: '';
+        width: 35px;
+        height: 35px;
+        display: block;
+        position: absolute;
+        top: 35px;
+        left: 50%;
+        left: calc(50% - 15px);
+        border-radius: 50%;
+        z-index: 1;
+
+        background-color: #FFF !important;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='35' height='35'%3E%3Cpath fill='#{rgba( $custom1, .999 )}' d='M17.5 0C7.83 0 0 7.84 0 17.5S7.83 35 17.5 35 35 27.16 35 17.5 27.16 0 17.5 0zm9.21 13.33L15.8 24.2c-.17.2-.39.3-.67.3s-.49-.1-.67-.3l-6.17-6.14a.92.92 0 0 1-.26-.67c0-.27.09-.49.26-.67l1.37-1.33c.17-.2.39-.3.65-.3s.49.1.68.3l4.14 4.14 8.88-8.88c.2-.2.43-.3.68-.3s.47.1.65.3L26.71 12c.17.17.26.4.26.67s-.09.49-.26.66z'/%3E%3C/svg%3E");
+
+      }
+    }
+
+  }
+
+  /*------------------------------------------------------------------------------------
+  ------------------------------------------------------------------------------------*/
+
+  div.form-control{
+    padding: 0;
+    border-radius: 0;
+
+    input{
+      @extend .form-control;
+      border: 0;
+      margin: 0;
+    }
+  }
+
+
+  .choices:after {
+
+    [dir='rtl'] & {
+      right: unset;
+      left: 11.5px;
+    }
+  }
+
+  .choices .choices__button {
+
+    [dir='rtl'] & {
+      right: unset;
+      left: 0;
+      margin-right: unset;
+      margin-left: 25px;
+    }
+  }
+
+.control-label--hidden.field-required {
+    [dir='rtl'] & {
+      right: unset;
+      left: 40px;
+      line-height: 30px;
+    }
+  }
+  .formio-data-grid .control-label.control-label--hidden.field-required{
+    display: none;
+  }
+
+
+
+}
+
+
+
+
+/*-------------------- Error ------------------------------------*/
+.form-group.has-feedback.formio-component.has-error.alert.alert-danger{
+  color: unset;
+  background-color: unset;
+  border: 0;
+  padding: 0;
+
+  label{
+    color: inherit
+  }
+
+  .formio-errors.invalid-feedback{
+    .help-block{
+color: $danger
+  }
+  }
+}
+
+
+
+
+
+/*-------------------- flatpickr ------------------------------------*/
+.flatpickr-calendar {
+
+  .form-control{
+    cursor: pointer;
+  }
+  .dayContainer,
+  .flatpickr-weekdaycontainer {
+    flex-direction: row-reverse;
+  }
+
+  .flatpickr-months {
+    .flatpickr-month {
+      height: 38px;
+    }
+
+    .flatpickr-prev-month {
+      left: unset !important;
+      right: 0;
+      transform: scaleX(-1);
+    }
+
+    .flatpickr-next-month {
+      right: unset !important;
+      left: 0;
+      transform: scaleX(-1);
+    }
+  }
+}
+
+.flatpickr-day {
+
+  &.selected.startRange,
+  &.startRange.startRange,
+  &.endRange.startRange {
+    border-radius: 0 50px 50px 0;
+  }
+
+  &.selected.endRange,
+  &.startRange.endRange,
+  &.endRange.endRange {
+    border-radius: 50px 0 0 50px;
+  }
+
+  &.selected.startRange+.endRange:not(:nth-child(7n+1)),
+  &.startRange.startRange+.endRange:not(:nth-child(7n+1)),
+  &.endRange.startRange+.endRange:not(:nth-child(7n+1)) {
+    box-shadow: 10px 0 0 #569ff7;
+  }
+}
+
+.flatpickr-monthDropdown-months, numInputWrapper {
+  font-size: 1rem !important
+}
+
+.numInputWrapper {
+  [dir='rtl'] & {
+    padding-right: 7px;
+  }
+
+  .numInput{
+    [dir='rtl'] & {
+    text-align: right;
+    padding: 0 0 0 1.7ch;
+  }
+  }
+  span {
+    [dir='rtl'] & {
+      right: unset;
+      left: 0;
+    }
+  }
+}
+
+/*-------------------------------------------*/
+
+.choices__item.choices__item--selectable > span{
+  white-space: nowrap;
+  padding: 5px 7px 0 30px;
+  display: inline-block;
+}
+
+
+
+
+.was-validated .form-control:invalid, .was-validated .fields-list select:invalid, .fields-list .was-validated select:invalid, .was-validated .formio-form div.form-control input:invalid, .formio-form div.form-control .was-validated input:invalid, .form-control.is-invalid, .fields-list select.is-invalid, .formio-form div.form-control input.is-invalid {
+  border-color: #ced4da;
+}
+
+
+.choices__item.choices__item--selectable{
+  white-space: nowrap;
+    padding-left: 30px;
+    padding-top: 6px;
+}

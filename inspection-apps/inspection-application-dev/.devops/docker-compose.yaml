@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+
+  build: &base
+    # image: nexus.elm.sa/elm-core/dotnetcore:2.2-7z-16.02-node10.16.0-core0.3.8
+    image: nexus.elm.sa/elm-core/dotnetcore:2.2-sdk-7z-16.02-corev0.1.0
+    volumes:
+    - ../:/data
+    working_dir: /data
+    env_file:
+    - ../.env
+
+  build-ui:
+    <<: *base
+    image: nexus.elm.sa/elm-core/node:10.11-alpine-ng7.2.3-7z16-core${BUILDER_IMAGE_TAG_NODE}
+
+  git:
+    image: nexus.elm.sa/elm-core/git:2.13.0-alpine3.6-curl7.54.0-core0.5.0
+    volumes:
+    - ../:/data
+    working_dir: /data
+    env_file:
+    - ../.env
+

@@ -1,0 +1,45 @@
+
+$gray-200: #F7FBF2;
+
+$headings-margin-bottom:      0;
+/* $border-radius:               0; */
+
+$headings-font-weight:        normal;
+
+$spacer: 1rem;
+$spacers: ();
+$spacers: map-merge(
+  (
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 2.25),
+    6: ($spacer * 3.5)
+  ),
+  $spacers
+);
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px, // Small screen / phone
+  md: 768px, // Medium screen / tablet
+  lg: 992px, // Large screen / desktop
+  xl: 1200px, // Extra large screen / wide desktop
+  xxl: 1400px, // Extra large screen / wide desktop
+  xxxl: 1600px //new for muqeem
+);
+
+// Grid containers
+//
+// Define the maximum width of `.container` for different screen sizes.
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px,
+  xxxl: 1500px
+);

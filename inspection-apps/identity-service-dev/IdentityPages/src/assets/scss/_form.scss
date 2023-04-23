@@ -1,0 +1,100 @@
+
+
+.focusStyle{
+  transition: all 0.9s;
+  @extend .w-50;
+}
+.blurStyle{
+  @extend .w-25;
+}
+
+
+.custom-select:disabled{
+  background-color: $gray-200 !important;
+}
+
+// Checkboxes
+//
+// Tweak just a few things for checkboxes.
+.custom-checkbox {
+    .custom-control-label::before {
+      border: 1px $gray-400 solid;
+    }
+  }
+  
+  // Radios
+  //
+  // Tweak just a few things for radios.
+  .custom-radio {
+    .custom-control-label::before {
+        border: 1px $gray-400 solid;
+    }
+  }
+
+
+
+// Tables
+//
+// Customizes the `.table` component with basic values, each used across all table variations.
+
+
+
+
+
+
+$table-head-bg:               $gray-100;
+$table-head-color:            $gray-800;
+
+
+  .table.customTable {
+    .thead-light {
+      th {
+        border-bottom: 2px $custom1 solid;
+      }
+    }
+  }
+
+  .table-hover {
+    tbody tr {
+      @include hover {
+        background-color: #FAFAFA;
+      }
+    }
+  }
+
+
+
+  
+
+// Multiselect Dropdown
+
+.multiselect-dropdown .dropdown-btn .selected-item {
+  border: 1px solid $custom2 !important;
+  background: $custom2 !important;
+}
+
+.multiselect-item-checkbox input[type=checkbox]:focus+div:before,
+.multiselect-item-checkbox input[type=checkbox]:hover+div:before {
+  border-color: $custom2 !important;
+}
+
+.multiselect-item-checkbox input[type=checkbox]+div:before {
+  color: $custom2 !important;
+  border: 2px solid $custom2 !important;
+}
+
+.multiselect-item-checkbox input[type=checkbox]:checked+div:before {
+  background: $custom2 !important
+}
+
+@-webkit-keyframes borderscale {
+  50% {
+    box-shadow: 0 0 0 2px $custom2 !important
+  }
+}
+
+@keyframes borderscale {
+  50% {
+    box-shadow: 0 0 0 2px $custom2 !important
+  }
+}

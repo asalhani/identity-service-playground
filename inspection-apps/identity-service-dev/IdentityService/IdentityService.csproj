@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="IdentityService\obj\**" />
+    <Compile Remove="Quickstart\Account\**" />
+    <Content Remove="IdentityService\obj\**" />
+    <Content Remove="Quickstart\Account\**" />
+    <EmbeddedResource Remove="IdentityService\obj\**" />
+    <EmbeddedResource Remove="Quickstart\Account\**" />
+    <None Remove="IdentityService\obj\**" />
+    <None Remove="Quickstart\Account\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Quickstart\Account\AccountController.cs" />
+    <Compile Include="Quickstart\Account\AccountOptions.cs" />
+    <Compile Include="Quickstart\Account\ExternalController.cs" />
+    <Compile Include="Quickstart\Account\ExternalProvider.cs" />
+    <Compile Include="Quickstart\Account\LoggedOutViewModel.cs" />
+    <Compile Include="Quickstart\Account\LoginInputModel.cs" />
+    <Compile Include="Quickstart\Account\LoginViewModel.cs" />
+    <Compile Include="Quickstart\Account\LogoutInputModel.cs" />
+    <Compile Include="Quickstart\Account\LogoutViewModel.cs" />
+    <Compile Include="Quickstart\Account\RedirectViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Dapper.FastCrud" Version="2.5.0.39" />
+    <PackageReference Include="dbup-sqlserver" Version="4.2.0" />
+    <PackageReference Include="IdentityServer4" Version="2.4.0" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.4.0" />
+    <PackageReference Include="IdentityServer4.EntityFramework" Version="2.4.0"></PackageReference>
+    <PackageReference Include="ISP.Extensions.Localization.Json" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.5" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
+    <PackageReference Include="PlatformCommons.Service.Application" Version="1.0.36" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="IdentityService\" />
+  </ItemGroup>
+
+</Project>

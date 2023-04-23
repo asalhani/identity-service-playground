@@ -1,0 +1,17 @@
+{
+
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/identity-ui",
+  "lib": {
+    "entryFile": "src/public_api.ts"
+  },
+  "whitelistedNonPeerDependencies": [
+    "ngx-captcha",
+    "bootstrap",
+    "font-awesome",
+    "ngx-bootstrap",
+    "ngx-popover",
+    "@ngx-translate/core",
+    "@ngx-translate/http-loader"
+  ]
+}

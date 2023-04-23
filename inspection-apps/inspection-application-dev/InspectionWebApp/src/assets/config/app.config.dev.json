@@ -1,0 +1,42 @@
+{
+  "env": "development",
+  "ServiceURL": "",
+  "EntityServiceURL": "http://jazan.dev.isp.elm.sa/entityservice/api",
+  "FacilityServiceURL": "http://jazan.dev.isp.elm.sa/facilityservice/api",
+  "InspectionCenterServiceURL": "http://jazan.dev.isp.elm.sa/inspectioncenterservice/api",
+  "LookupServiceURL": "http://jazan.dev.isp.elm.sa/lookupservice/api",
+  "InspectionUserManagementServiceURL": "http://jazan.dev.isp.elm.sa/usersmanagementservice/api",
+  "InspectionProcessServiceURL": "http://jazan.dev.isp.elm.sa/inspectionprocessservice/api",
+  "ElmBpmServiceURL": "http://jazan.dev.isp.elm.sa/elmbpmservice/api",
+  "FileServiceUrl": "http://jazan.dev.isp.elm.sa/fileservice/api",
+  "AppealsServiceURL": "http://jazan.dev.isp.elm.sa/appealsservice/api",
+  "PenaltiesServiceURL": "http://jazan.dev.isp.elm.sa/penaltiesservice/api",
+  "IncidentsServiceURL": "http://jazan.dev.isp.elm.sa/incidentsservice/api",
+  "FieldSupportServiceURL": "http://jazan.dev.isp.elm.sa/FieldSupportService/api",
+  "TasksInboxUrl": "/portal/inbox",
+  "WorkflowRootUrl": "/portal/workflow/",
+  "CoreServicesProxyUrl": "http://jazan.dev.isp.elm.sa/CoreProxyService/api",
+  "SurveyorServiceURL": "http://jazan.dev.isp.elm.sa/surveyorservice/api",
+  "PaymentServiceURL": "http://jazan.dev.isp.elm.sa/paymentservice/api",
+  "AppTitle":"تفتيش أمانة الرياض",
+  "AppLogo":"assets/images/ruh.svg",
+  "maxAllowedSize": 3,
+  "IdentityUIConfig": {
+    "recaptchaSiteKey": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+    "identityServerEndpoint": "/identityservice"
+  },
+
+  "IdentityGuardsConfig": {
+    "oidcSettings": {
+      "authority": "http://jazan.dev.isp.elm.sa/identityservice",
+      "client_id": "local_spa",
+      "redirect_uri": "http://localhost:4200/#/identity-guards/auth-callback#",
+      "post_logout_redirect_uri": "http://localhost:4200",
+      "response_type": "id_token token",
+      "scope": "openid profile inspection_profile",
+      "filterProtocolClaims": true,
+      "loadUserInfo": true
+    },
+    "enableConsoleLogging": true
+  }
+}

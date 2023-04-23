@@ -1,0 +1,69 @@
+<nav class="navbar p-0">
+  <div class="d-flex justify-content-start h-100">
+    <!--<div class="navbar-header bg-white">
+        <a class="navbar-brand swatch-custom1 w-100" [routerLink]="['/portal']" title="Inspection Application">
+        <img class="logo-expand" alt="" src="~/../assets/images/taftesh-logo.svg">
+      </a>
+    </div>-->
+    <button class="btn navbar-toggler" (click)="toggleNavbar()">
+      <div class="cd-nav-trigger"><span class="cd-nav-icon"></span></div>
+    </button>
+  </div>
+  <div class="d-flex justify-content-end h-100">
+    <button type="button" class="btn btn-custom2 position-relative px-3">
+      <div dropdown>
+        <div class="thumb-sm list-icon d-flex" dropdownToggle (click)="false" aria-controls="basic-link-dropdown"><img
+            src="~/../assets/images/space.png" class="rounded-circle avatar mr-3" alt="">
+          <div class="pr-5 text-white-50 text-left d-flex align-self-center flex-column">
+            <h3 class="my-1">{{ userInfo?.given_name }}</h3>
+            <small>{{ userCenterText }}</small>
+          </div>
+        </div>
+        <div id="basic-link-dropdown" *dropdownMenu class="dropdown-menu shadow border-0 p-0" role="menu"
+          aria-labelledby="basic-link">
+          <div class="card">
+            <header class="card-header d-flex p-0">
+              <a (click)="onSignOut()" title="{{ 'Logout' | translate }}" class="col-md-4 py-3 text-center bg-light">
+                <i class="fa fa-sign-out-alt align-middle"></i>
+              </a>
+              <a [routerLink]="['/']" title="{{ 'User profile' | translate }}"
+                class="col-md-4 py-3 text-center bg-light">
+                <i class="fa fa-user align-middle"></i>
+              </a>
+              <a [routerLink]="['/portal/users/change-password']" title="{{ 'Change Password' | translate }}"
+                class="col-md-4 py-3 text-center bg-light">
+                <i class="fa fa-key align-middle"></i>
+              </a>
+              <a [routerLink]="['/portal/entity']" title="{{ 'Configure Services' | translate }}"
+                *ngIf="hasPrivilege(appRoles.SYSTEM_ADMIN)" class="col-md-4 py-3 text-center bg-light">
+                <i class="fa fa-cog align-middle"></i>
+              </a>
+            </header>
+            <ul class="list-unstyled card-body">
+              <!-- <li>
+                <a *ngIf="hasPrivilege(appRoles.SYSTEM_ADMIN)" [routerLink]="['/portal/entity']" class="dropdown-item">
+                  <span><span class="align-middle">{{ 'Configure Services' | translate }}</span></span>
+                </a>
+              </li> -->
+              <li>
+                <a [routerLink]="['/portal/users/change-password']" class="dropdown-item">
+                  <span><span class="align-middle">{{ 'Change Password' | translate }}</span></span>
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['/portal/inbox']" class="dropdown-item">
+                  <span><span class="align-middle">{{ 'Check Inbox' | translate }}</span></span>
+                </a>
+              </li>
+              <li>
+                <a (click)="onSignOut()" class="dropdown-item">
+                  <span><span class="align-middle">{{ 'Logout' | translate }}</span></span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </button>
+  </div>
+</nav>
