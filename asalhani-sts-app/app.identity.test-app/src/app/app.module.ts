@@ -22,6 +22,6 @@ export class AppModule { }
 
 export function getConfigValuesForIdentityUi(): IdentityUiSettings {
   return {
-    identityServerEndpoint: 'http://localhost:5000',
+    identityServerEndpoint: 'http://localhost:5006',
   };
 }

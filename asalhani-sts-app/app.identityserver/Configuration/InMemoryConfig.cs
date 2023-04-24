@@ -63,7 +63,22 @@ namespace App.IdentityServer.Configuration
                       new Claim("position", "Viewer"),
                       new Claim("country", "USA")
                   }
-              }
+              },
+              new TestUser
+              {
+                  SubjectId = "cc2559c9-8623-407f-a4d2-3f440e6ea47e",
+                  Username = "2088755802",
+                  Password = "2088755802",
+                  Claims = new List<Claim>
+                  {
+                      new Claim("given_name", "adib"),
+                      new Claim("family_name", "salhani"),
+                      new Claim("address", "sulimanyah, riyadh 123"),
+                      new Claim("role", "Admin"),
+                      new Claim("position", "Administrator"),
+                      new Claim("country", "KSA")
+                  }
+              },
           };
 
         public static IEnumerable<Client> GetClients() =>

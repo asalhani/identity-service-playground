@@ -7,6 +7,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CommonModule} from "@angular/common";
 import {CONFIG_TOKEN_KEY, IdentityUiConfig} from "./utils/identity-ui-config";
 import {IdentityUiSettings} from "./models/identity-ui-settings";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {IdentityUiSettings} from "./models/identity-ui-settings";
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   exports: [
     IdentityLibComponent,

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using App.IdentityServer.Configuration;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace App.IdentityServer
 {
@@ -42,6 +43,14 @@ namespace App.IdentityServer
                         sql => sql.MigrationsAssembly(migrationAssembly));
                 });
 
+            services.AddCors(p => p.AddPolicy("corsapp", builder =>
+            {
+                builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    // .AllowCredentials()
+                    .AllowAnyHeader();
+            }));
+            
             services.AddControllersWithViews();
         }
 
@@ -54,10 +63,17 @@ namespace App.IdentityServer
 
             app.UseStaticFiles();
             app.UseRouting();
+            
+            app.UseCors("corsapp");
 
             app.UseIdentityServer();
-
             app.UseAuthorization();
+            
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedProto
+            });
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
