@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {IdentityLibModule} from "identty-lib";
+import {IdentityLibModule, IdentityUiSettings} from "identty-lib";
 
 
 @NgModule({
@@ -13,9 +13,15 @@ import {IdentityLibModule} from "identty-lib";
   imports: [
     BrowserModule,
     AppRoutingModule,
-    IdentityLibModule
+    IdentityLibModule.forLibRoot({ getConfigValues: getConfigValuesForIdentityUi })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function getConfigValuesForIdentityUi(): IdentityUiSettings {
+  return {
+    identityServerEndpoint: 'http://localhost:5000',
+  };
+}

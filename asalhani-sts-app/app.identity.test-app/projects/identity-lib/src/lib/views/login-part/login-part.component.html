@@ -1,2 +1,28 @@
-<p>login-part works!</p>
-
+<div class="container d-flex justify-content-center">
+  <div class="card p-5 border-0 my-5 rounded-2">
+    <div class="my-5 text-center">
+      <h2 class="font-weight-bold">الرجاء ادخال رقم بطاقة الاحوال/الاقامة ثم اضغط تسجيل</h2>
+    </div>
+    <div class="d-flex justify-content-center my-3">
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.valid)" class="col-10 mt-5">
+        <div class="form-group mx-sm-3 mb-6">
+          <label for="idNumber">رقم بطاقة الاحوال/ الاقامة<span class="text-danger px-1">*</span></label>
+          <input type="text" class="form-control mt-1" formControlName="idNumber" id="idNumber" required maxlength="10"
+                 [class.is-invalid]="f['idNumber']?.invalid && f['idNumber']?.touched"/>
+          <div *ngIf="f['idNumber']?.errors && f['idNumber']?.invalid && f['idNumber']?.touched"
+               class="invalid-feedback">
+            <div *ngIf="f['idNumber']?.errors && f['idNumber']?.hasError('required')">رقم الهوية/الإقامة مطلوب</div>
+            <div
+              *ngIf="f['idNumber']?.errors && f['idNumber']?.hasError('invalid') && !f['idNumber']?.hasError('required')">
+              {{f['idNumber']?.getError('invalid')}}</div>
+                        <div *ngIf="f['idNumber']?.errors && f['idNumber']?.hasError('invalid-nin-or-iqama') && !f['idNumber']?.hasError('required')">
+                          {{f['idNumber']?.getError('invalid-nin-or-iqama')}}</div>
+          </div>
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-awq-secondary px-3 w-100">تسجيل
+          الدخول
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
