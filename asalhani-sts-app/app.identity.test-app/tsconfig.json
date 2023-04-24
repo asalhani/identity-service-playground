@@ -9,7 +9,7 @@
     "noImplicitOverride": true,
     "paths": {
       "identty-lib": [
-        "dist/identty-lib/identty-lib",
+        "dist/identity-lib/identty-lib",
         "dist/identty-lib"
       ]
     },
