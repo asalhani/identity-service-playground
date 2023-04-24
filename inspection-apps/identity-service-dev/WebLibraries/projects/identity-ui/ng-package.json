@@ -6,6 +6,10 @@
   },
   "whitelistedNonPeerDependencies": [
     "@ngx-translate/core",
-    "@ngx-translate/http-loader"
+    "@ngx-translate/http-loader",
+    "ngx-captcha",
+    "bootstrap",
+    "font-awesome",
+    "ngx-popover"
   ]
 }
