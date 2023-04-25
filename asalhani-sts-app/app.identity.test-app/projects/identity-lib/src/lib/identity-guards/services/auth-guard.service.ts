@@ -11,9 +11,7 @@ export class AuthGuardService implements CanActivate {
 
   canActivate(): Promise<boolean> {
     return new Promise((resolve, reject) => {
-
       this.authService.isLoggedIn().then(result => {
-        debugger
         if (!result)
           this.authService.startAuthentication();
         resolve(result);

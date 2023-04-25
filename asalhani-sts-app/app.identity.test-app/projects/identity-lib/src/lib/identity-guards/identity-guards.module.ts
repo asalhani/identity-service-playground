@@ -7,13 +7,15 @@ import {IdentityGuardsSettings} from "./models/identity-guards-settings";
 import { AuthCallbackComponent } from './views/auth-callback/auth-callback.component';
 import { SilentRefreshComponent } from './views/silent-refresh/silent-refresh.component';
 import { IdentityGuardsComponent } from './identity-guards.component';
+import { TestGComponent } from './views/test-g.component';
 
 
 @NgModule({
   declarations: [
     AuthCallbackComponent,
     SilentRefreshComponent,
-    IdentityGuardsComponent
+    IdentityGuardsComponent,
+    TestGComponent
   ],
   imports: [
     CommonModule,

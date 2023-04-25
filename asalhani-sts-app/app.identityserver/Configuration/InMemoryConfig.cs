@@ -133,6 +133,26 @@ namespace App.IdentityServer.Configuration
                    PostLogoutRedirectUris = new List<string> { "http://localhost:4200/signout-callback" },
                    RequireConsent = false,
                    AccessTokenLifetime = 600
+               },
+               new Client
+               {
+                   ClientName = "Angular SPA Client",
+                   ClientId = "angular-spa-client",
+                   AllowedGrantTypes = GrantTypes.Code, // -- CHECK
+                   RedirectUris = new List<string>{ "http://localhost:4200/#/identity-guards/auth-callback#", "http://localhost:4200/#/identity-guards/silent-refresh#" },
+                   RequirePkce = true, // -- CHECK
+                   AllowAccessTokensViaBrowser = true,
+                   AllowedScopes =
+                   {
+                       IdentityServerConstants.StandardScopes.OpenId,
+                       IdentityServerConstants.StandardScopes.Profile,
+                       "companyApi"
+                   },
+                   AllowedCorsOrigins = { "http://localhost:4200" },
+                   RequireClientSecret = false,
+                   PostLogoutRedirectUris = new List<string> { "http://localhost:4200/signout-callback", "http://localhost:4200" },
+                   RequireConsent = false,
+                   AccessTokenLifetime = 600
                }
             };
     }

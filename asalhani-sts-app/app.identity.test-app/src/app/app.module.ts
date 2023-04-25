@@ -26,7 +26,7 @@ export class AppModule { }
 
 export function getConfigValuesForIdentityUi(): IdentityUiSettings {
   return {
-    identityServerEndpoint: 'http://localhost:5006',
+    identityServerEndpoint: 'https://localhost:5005',
   };
 }
 
@@ -35,18 +35,17 @@ export function getConfigValuesForIdentityGurads(): IdentityGuardsSettings {
     enableConsoleLogging: true,
     postLoginRedirectUrl: '/protected',
     oidcSettings: {
-      authority: 'http://localhost:5000',
-      client_id: 'local_spa',
+      authority: 'https://localhost:5005',
+      client_id: 'angular-spa-client',
       redirect_uri: 'http://localhost:4200/#/identity-guards/auth-callback#',
+      scope: 'openid profile companyApi',
+      response_type: 'code',
       post_logout_redirect_uri: 'http://localhost:4200',
-      response_type: 'id_token token',
-      // tslint:disable-next-line:max-line-length
-      scope: 'openid profile inspection_profile',
+      automaticSilentRenew: true,
+      silent_redirect_uri: 'http://localhost:4200/#/identity-guards/silent-refresh#',
+
       filterProtocolClaims: true,
       loadUserInfo: true,
-      automaticSilentRenew: true,
-      // silent_redirect_uri: 'http://localhost:4200/silent-refresh.html'
-      silent_redirect_uri: 'http://localhost:4200/#/identity-guards/silent-refresh#'
     }
   };
 }
