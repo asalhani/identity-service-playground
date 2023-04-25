@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "libWatch": "ng build identty-lib --watch"
+    "libWatch": "ng build identty-lib --watch",
+    "buildAll": "ng build identty-lib && ng build"
   },
   "private": true,
   "dependencies": {
@@ -21,7 +22,8 @@
     "@angular/router": "^13.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "oidc-client": "~1.11.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^13.3.11",

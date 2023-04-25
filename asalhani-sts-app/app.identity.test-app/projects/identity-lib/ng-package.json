@@ -3,5 +3,6 @@
   "dest": "../../dist/identty-lib",
   "lib": {
     "entryFile": "src/public-api.ts"
-  }
+  },
+  "allowedNonPeerDependencies": ["oidc-client"]
 }
