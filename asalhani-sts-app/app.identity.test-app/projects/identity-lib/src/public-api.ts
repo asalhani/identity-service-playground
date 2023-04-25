@@ -13,3 +13,6 @@ export * from './lib/identity-guards/identity-guards.module'
 export * from './lib/identity-guards/identity-guards-routing.module'
 export * from './lib/identity-guards/models/identity-guards-settings'
 export * from './lib/identity-guards/models/identity-guards-config'
+export * from './lib/identity-guards/services/auth.service'
+export * from './lib/identity-guards/services/auth-guard.service'
+
