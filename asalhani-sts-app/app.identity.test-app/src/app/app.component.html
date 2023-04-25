@@ -1,1 +1,9 @@
-<lib-login></lib-login>
+<!--The content below is only a placeholder and can be replaced.-->
+<div >
+
+  <a routerLink="/protected" >{{'Go to'}} '/protected' {{'page'}}</a><br />
+  <a routerLink="/" >{{'Go to'}} '/' {{'page'}}</a><br />
+  <button (click)="callSecureAPI()">{{'Call Secure API'}}</button><br />
+  <button (click)="signout()">{{'Sign Out'}}</button>
+</div>
+<router-outlet></router-outlet>

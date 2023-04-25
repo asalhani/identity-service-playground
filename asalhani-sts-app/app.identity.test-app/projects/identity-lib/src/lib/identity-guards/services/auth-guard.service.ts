@@ -13,6 +13,7 @@ export class AuthGuardService implements CanActivate {
     return new Promise((resolve, reject) => {
 
       this.authService.isLoggedIn().then(result => {
+        debugger
         if (!result)
           this.authService.startAuthentication();
         resolve(result);

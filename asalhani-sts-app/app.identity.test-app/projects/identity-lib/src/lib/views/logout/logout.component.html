@@ -1,0 +1,27 @@
+<div class="login__bg d-flex justify-content-center">
+  <div class="login__width">
+    <div class="text-center shadow card border-0 w-login p-5">
+      <div class="display-1 text-success">
+        <i class="fa fa-sign-out-alt"></i>
+      </div>
+
+      <div *ngIf="step == 0">
+        <div class="h3 text-custom2 mt-4">{{'Signing-out'}}...<br />{{'Please wait'}}</div>
+      </div>
+
+      <div *ngIf="step == 1">
+        <div class="h3 text-custom2 mt-4">{{'You are about to be signed out'}}
+          {{clientName?' from the '+clientName:''}}.
+          <br />{{'Are you sure'}}?</div>
+        <button (click)="signOutAssured()" type="button"
+                class="btn btn-custom1 my-4 px-5 rounded-22">{{'Yes'}}</button>
+      </div>
+
+      <div *ngIf="step == 2">
+        <div class="h3 text-custom2 mt-4">{{'You have been signed out'}}
+          {{clientName?' from the '+clientName:''}}.</div>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -9,13 +9,15 @@ import {CONFIG_TOKEN_KEY, IdentityUiConfig} from "./utils/identity-ui-config";
 import {IdentityUiSettings} from "./models/identity-ui-settings";
 import {HttpClientModule} from "@angular/common/http";
 import {IdentityUiRoutingModule} from "./identity-ui-routing.module";
+import { LogoutComponent } from './views/logout/logout.component';
 
 
 @NgModule({
   declarations: [
     IdentityLibComponent,
     LoginPartComponent,
-    LoginComponent
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,

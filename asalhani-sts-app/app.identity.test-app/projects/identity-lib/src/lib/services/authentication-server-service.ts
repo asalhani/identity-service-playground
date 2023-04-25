@@ -1,9 +1,10 @@
 import {Inject, Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {CONFIG_TOKEN_KEY, IdentityUiConfig} from "../utils/identity-ui-config";
 import {UserLoginModel} from "../models/user-login-model";
 import {Observable} from "rxjs";
 import {UserLoginResult} from "../models/user-login-result";
+import {UserLogoutResult} from "../models/user-logout-result";
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,14 @@ export class AuthenticationServerService {
 
   authenticate(loginInfo: UserLoginModel): Observable<UserLoginResult> {
     return this.http.post<UserLoginResult>(`${this.endpoint}/sign-in`, loginInfo, { withCredentials: true });
+  }
+
+  signOutAttempt(logoutId: string): Observable<UserLogoutResult> {
+    const params = new HttpParams().set('logoutId', logoutId);
+    return this.http.get<UserLogoutResult>(`${this.endpoint}/sign-out`, { params: params, withCredentials: true });
+  }
+
+  signOutAssured(logoutId: string): Observable<UserLogoutResult> {
+    return this.http.post<UserLogoutResult>(`${this.endpoint}/sign-out`, logoutId, { withCredentials: true });
   }
 }
