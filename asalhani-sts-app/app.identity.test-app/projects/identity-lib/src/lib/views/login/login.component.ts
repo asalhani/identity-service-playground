@@ -17,38 +17,27 @@ export class LoginComponent implements OnInit {
   LoginTypeEnum = LoginTypeEnum;
 
   constructor(private _route: ActivatedRoute) {
+
+    // try to pick the value from routing data
     this.activatedLoginType = _route.snapshot.data['loginType'];
 
-    this._route.queryParams.subscribe(params => {
-      debugger
-      this.returnUrl = params['returnUrl'];
-      let decodedUrl = decodeURIComponent(this.returnUrl);
+    // if no value provided, then try to pick value from returnUrl querystring (after decode it)
+    if(!this.activatedLoginType) {
+      this._route.queryParams.subscribe(params => {
+        this.returnUrl = params['returnUrl'];
+        let decodedUrl = decodeURIComponent(this.returnUrl);
 
-      this.activatedLoginType = this.getQueryVariable(decodedUrl, 'loginType')?.toLowerCase();
-
-
-    });
-
-    // let test = this.getQueryParamFromMalformedURL('loginType');
+        this.activatedLoginType = this.getQueryVariable(decodedUrl, 'loginType')?.toLowerCase();
+        if (!this.activatedLoginType)
+          this.activatedLoginType = LoginTypeEnum.public.toLowerCase();
+      });
+    }
   }
 
   ngOnInit(): void {
     if (!this.returnUrl || this.returnUrl.length === 0) {
       console.error('Cannot find the \'returnUrl\' parameter. This page shouldn\'t be accessed directly.');
     }
-  }
-
-  getQueryVariable(url: string, querystringName: string): string | null {
-    var query = url;
-    var vars = query.split('&');
-    for (var i = 0; i < vars.length; i++) {
-      var pair = vars[i].split('=');
-      if (decodeURIComponent(pair[0]) == querystringName) {
-        return decodeURIComponent(pair[1]);
-      }
-    }
-    return null;
-    console.log('Query variable %s not found', querystringName);
   }
 
   onCommandEvent({any}: { any: any }) {
@@ -60,4 +49,15 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  getQueryVariable(url: string, querystringName: string): string | null {
+    const query = url;
+    const vars = query.split('&');
+    for (let i = 0; i < vars.length; i++) {
+      const pair = vars[i].split('=');
+      if (decodeURIComponent(pair[0]) == querystringName) {
+        return decodeURIComponent(pair[1]);
+      }
+    }
+    return null;
+  }
 }

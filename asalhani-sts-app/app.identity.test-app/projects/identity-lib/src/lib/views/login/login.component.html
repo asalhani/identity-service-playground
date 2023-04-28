@@ -1,6 +1,9 @@
-<lib-login-part *ngIf="activatedLoginType === LoginTypeEnum.public" [returnUrl]="returnUrl"
+<lib-login-part *ngIf="activatedLoginType === LoginTypeEnum.public"
+                [returnUrl]="returnUrl" [loginType]="activatedLoginType"
                 (commandEvent)="onCommandEvent({any : $event})"></lib-login-part>
-<lib-ad-login-part *ngIf="activatedLoginType === LoginTypeEnum.employee"></lib-ad-login-part>
+<lib-ad-login-part *ngIf="activatedLoginType === LoginTypeEnum.employee"
+                   [returnUrl]="returnUrl" [loginType]="activatedLoginType"
+                   (commandEvent)="onCommandEvent({any : $event})"></lib-ad-login-part>
 
 <div *ngIf="activatedLoginType !== LoginTypeEnum.public && activatedLoginType !== LoginTypeEnum.employee">
   Login type {{activatedLoginType}} is not yet supported / implemented....

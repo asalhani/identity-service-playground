@@ -1,10 +1,10 @@
 import {Inject, Injectable} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {CONFIG_TOKEN_KEY, IdentityUiConfig} from "../utils/identity-ui-config";
-import {UserLoginModel} from "../models/user-login-model";
 import {Observable} from "rxjs";
 import {UserLoginResult} from "../models/user-login-result";
 import {UserLogoutResult} from "../models/user-logout-result";
+import {EmployeeUserLoginModel, PublicUserLoginModel} from "../models/user-login-model";
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +24,7 @@ export class AuthenticationServerService {
     this.endpoint = `${(baseHTTPUrl ? baseHTTPUrl : '')}/${this.endpoint}`;
   }
 
-  authenticate(loginInfo: UserLoginModel): Observable<UserLoginResult> {
+  authenticatePublicUser(loginInfo: PublicUserLoginModel | EmployeeUserLoginModel): Observable<UserLoginResult> {
     return this.http.post<UserLoginResult>(`${this.endpoint}/sign-in`, loginInfo, { withCredentials: true });
   }
 

@@ -1,15 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {LoginBaseView} from "../login-base-view";
 
 @Component({
   selector: 'lib-ad-login-part',
   templateUrl: './ad-login-part.component.html',
   styleUrls: ['./ad-login-part.component.css']
 })
-export class AdLoginPartComponent implements OnInit {
+export class AdLoginPartComponent extends  LoginBaseView implements OnInit {
 
-  constructor() { }
+  constructor() {
+    super();
+  }
 
-  ngOnInit(): void {
+  override ngOnInit(): void {
+
   }
 
 }
