@@ -20,7 +20,7 @@ export class AuthGuardService implements CanActivate {
   }
 
   private checkIsUserAuthenticated() {
-    return this._authService.isAuthenticated()
+    return this._authService. isAuthenticated()
       .then(res => {
         return res ? true : this.redirectToUnauthorized();
       });

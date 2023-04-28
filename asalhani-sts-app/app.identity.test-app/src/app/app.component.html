@@ -1,9 +1,16 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div >
 
-  <a routerLink="/protected" >{{'Go to'}} '/protected' {{'page'}}</a><br />
-  <a routerLink="/" >{{'Go to'}} '/' {{'page'}}</a><br />
+  <a routerLink="/" >{{'Go to'}} '/' home {{'page'}}</a><br />
   <button (click)="callSecureAPI()">{{'Call Secure API'}}</button><br />
-  <button (click)="signout()">{{'Sign Out'}}</button>
+  <button *ngIf="isLoggedIn" (click)="signout()">{{'Sign Out'}}</button>
+
+  <button type="button" routerLink="/protected"
+          class="btn btn-custom1 btn-block rounded-22">{{'login'}}</button>
+
+  <button type="button" *ngIf="!isLoggedIn" (click)="onEmployeeLogin()"
+          class="btn btn-custom1 btn-block rounded-22">{{'Employee login'}}</button>
 </div>
+
+<h3>Is Logged In? {{isLoggedIn}}</h3>
 <router-outlet></router-outlet>

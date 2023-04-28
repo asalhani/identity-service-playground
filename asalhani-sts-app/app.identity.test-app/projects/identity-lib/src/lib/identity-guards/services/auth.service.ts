@@ -2,6 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {Log, User, UserManager} from "oidc-client";
 import {IdentityGuardsConfig} from "../models/identity-guards-config";
 import {LoginTypeEnum} from "../../models/login-type-enum";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,17 @@ export class AuthService {
   private user: User | null = null;
   private isInitialized: boolean = false;
 
+  //  As soon as the user’s status changes, we want to inform any component that needs that kind of information
+  private _loginChangedSubject = new BehaviorSubject<boolean>(false);
+  private _loginChanged$ = this._loginChangedSubject.asObservable();
+
+  getIsLoggedIn(): Observable<boolean> {
+    return this._loginChanged$;
+  }
+
+  setIsLoggedIn(latestValue: boolean){
+    return this._loginChangedSubject.next(latestValue);
+  }
   constructor(
     @Inject('identity_guards_config') private _config: IdentityGuardsConfig,
   ) {
@@ -19,25 +31,36 @@ export class AuthService {
       Log.level = Log.DEBUG;
     }
     this.manager = new UserManager(_config.getConfigValues().oidcSettings);
+
+    // With the addAccessTokenExpired function, we subscribe to an event as soon as the access token expires.
+    // this.manager.events.addAccessTokenExpired(_ => {
+    //   this.setIsLoggedIn(false);
+    // });
+
     this.fetchUser();
   }
 
   isLoggedIn(): Promise<boolean> {
+    let isLoggedIn: boolean = false;
     return new Promise((resolve, reject) => {
       if (!this.isInitialized) {
         let timer = setInterval(() => {
           if (this.isInitialized) {
             clearInterval(timer);
-            resolve(this.isLoggedInInternal());
+            isLoggedIn = this.isLoggedInInternal();
+            this.setIsLoggedIn(isLoggedIn);
+            resolve(isLoggedIn);
           }
         }, 100);
       } else {
-        resolve(this.isLoggedInInternal());
+        isLoggedIn = this.isLoggedInInternal();
+        this.setIsLoggedIn(isLoggedIn);
+        resolve(isLoggedIn);
       }
     });
   }
 
-  private fetchUser() : Promise<void> {
+  private fetchUser(): Promise<void> {
     return this.manager.getUser().then(user => {
       this.user = user;
       this.isInitialized = true;
@@ -45,7 +68,9 @@ export class AuthService {
   }
 
   private isLoggedInInternal(): boolean {
-    return this.user != null && !this.user.expired;
+    let isLoggedIn =this.user != null && !this.user.expired;
+    this.setIsLoggedIn(isLoggedIn);
+    return isLoggedIn;
   }
 
   getClaims(): any {
@@ -78,6 +103,7 @@ export class AuthService {
   completeAuthentication(): Promise<void> {
     return this.manager.signinRedirectCallback().then(user => {
       this.user = user;
+      this.setIsLoggedIn(this.isLoggedInInternal());
     });
   }
 
@@ -89,6 +115,7 @@ export class AuthService {
   }
 
   signOut() {
-    this.manager.signoutRedirect({ 'id_token_hint': this.user ? this.user.id_token : '' });
+    this.manager.signoutRedirect({'id_token_hint': this.user ? this.user.id_token : ''})
+      .then(v => this.setIsLoggedIn(this.isLoggedInInternal()));
   }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AuthService} from "identty-lib";
+import {AuthService, LoginTypeEnum} from "identty-lib";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -10,9 +10,12 @@ import {HttpClient} from "@angular/common/http";
 export class AppComponent {
 
   title = 'identity-app';
+  isLoggedIn: boolean = false;
 
   constructor(private _authService: AuthService, private _http: HttpClient) {
-
+    this._authService.getIsLoggedIn().subscribe(isLoggedIn =>{
+      this.isLoggedIn = isLoggedIn;
+    });
   }
 
   signout() {
@@ -27,4 +30,7 @@ export class AppComponent {
     }).subscribe(result => console.log(`Calling Secure Method result: ${JSON.stringify(result)}`));
   }
 
+  onEmployeeLogin() {
+    this._authService.startAuthenticationCustom(LoginTypeEnum.employee);
+  }
 }
