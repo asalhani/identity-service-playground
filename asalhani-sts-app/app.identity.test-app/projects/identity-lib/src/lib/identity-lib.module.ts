@@ -10,6 +10,7 @@ import {IdentityUiSettings} from "./models/identity-ui-settings";
 import {HttpClientModule} from "@angular/common/http";
 import {IdentityUiRoutingModule} from "./identity-ui-routing.module";
 import { LogoutComponent } from './views/logout/logout.component';
+import { AdLoginPartComponent } from './views/ad-login-part/ad-login-part.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { LogoutComponent } from './views/logout/logout.component';
     IdentityLibComponent,
     LoginPartComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    AdLoginPartComponent
   ],
   imports: [
     CommonModule,

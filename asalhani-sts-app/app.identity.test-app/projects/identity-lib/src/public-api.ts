@@ -10,6 +10,7 @@ export * from './lib/views/login-part/login-part.component'
 export * from './lib/models/identity-ui-settings';
 export * from './lib/identity-lib.module'
 export * from './lib/identity-ui-routing.module'
+export * from './lib/models/login-type-enum';
 
 export * from './lib/identity-guards/identity-guards.module'
 export * from './lib/identity-guards/identity-guards-routing.module'

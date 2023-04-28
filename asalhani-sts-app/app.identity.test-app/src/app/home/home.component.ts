@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService, LoginTypeEnum} from "identty-lib";
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _authService: AuthService) { }
 
   ngOnInit(): void {
   }
 
+  onEmployeeLogin() {
+    this._authService.startAuthenticationCustom(LoginTypeEnum.employee);
+  }
 }

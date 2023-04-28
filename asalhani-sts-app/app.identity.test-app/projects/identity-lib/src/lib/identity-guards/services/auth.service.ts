@@ -1,6 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {Log, User, UserManager} from "oidc-client";
 import {IdentityGuardsConfig} from "../models/identity-guards-config";
+import {LoginTypeEnum} from "../../models/login-type-enum";
 
 @Injectable({
   providedIn: 'root'
@@ -66,6 +67,12 @@ export class AuthService {
 
   startAuthentication(): Promise<void> {
     return this.manager.signinRedirect();
+  }
+
+  startAuthenticationCustom(loginType: string): Promise<void> {
+    return this.manager.signinRedirect({
+      extraQueryParams: {loginType: loginType} // you can add any number of custom key: value pairs
+    });
   }
 
   completeAuthentication(): Promise<void> {
