@@ -17,20 +17,13 @@ export class LoginComponent implements OnInit {
   LoginTypeEnum = LoginTypeEnum;
 
   constructor(private _route: ActivatedRoute) {
-
-    // try to pick the value from routing data
-    this.activatedLoginType = _route.snapshot.data['loginType'];
-
     // if no value provided, then try to pick value from returnUrl querystring (after decode it)
-      this._route.queryParams.subscribe(params => {
-        this.returnUrl = params['returnUrl'];
-        if(!this.activatedLoginType){
-          let decodedUrl = decodeURIComponent(this.returnUrl);
-          this.activatedLoginType = this.getQueryVariable(decodedUrl, 'loginType')?.toLowerCase();
-          if (!this.activatedLoginType)
-            this.activatedLoginType = LoginTypeEnum.public.toLowerCase();
-        }
-      });
+    this._route.queryParams.subscribe(params => {
+      this.returnUrl = params['returnUrl'];
+      this.activatedLoginType = this.getQueryVariable(decodeURIComponent(this.returnUrl), 'loginType')?.toLowerCase();
+      if (!this.activatedLoginType)
+        this.activatedLoginType = LoginTypeEnum.public.toLowerCase();
+    });
   }
 
   ngOnInit(): void {
