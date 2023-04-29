@@ -4,11 +4,13 @@ import {IdentityGuardsComponent} from "./identity-guards.component";
 import {AuthCallbackComponent} from "./views/auth-callback/auth-callback.component";
 import {SilentRefreshComponent} from "./views/silent-refresh/silent-refresh.component";
 import {TestGComponent} from "./views/test-g.component";
+import {SignoutRedirectCallbackComponent} from "./views/signout-redirect-callback/signout-redirect-callback.component";
 
 const routes: Routes = [
   { path: '', component: IdentityGuardsComponent},
   { path: 'silent-refresh', component: SilentRefreshComponent },
   { path: 'auth-callback', component: AuthCallbackComponent },
+  { path: 'signout-callback', component: SignoutRedirectCallbackComponent },
   {
   path: 'test', component: TestGComponent
   }

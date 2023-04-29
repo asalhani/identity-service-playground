@@ -8,6 +8,7 @@ import { AuthCallbackComponent } from './views/auth-callback/auth-callback.compo
 import { SilentRefreshComponent } from './views/silent-refresh/silent-refresh.component';
 import { IdentityGuardsComponent } from './identity-guards.component';
 import { TestGComponent } from './views/test-g.component';
+import { SignoutRedirectCallbackComponent } from './views/signout-redirect-callback/signout-redirect-callback.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { TestGComponent } from './views/test-g.component';
     AuthCallbackComponent,
     SilentRefreshComponent,
     IdentityGuardsComponent,
-    TestGComponent
+    TestGComponent,
+    SignoutRedirectCallbackComponent
   ],
   imports: [
     CommonModule,

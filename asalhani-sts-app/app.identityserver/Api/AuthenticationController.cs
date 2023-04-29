@@ -8,6 +8,7 @@ using IdentityServer4.Services;
 using IdentityServer4.Test;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace App.IdentityServer.Api;
@@ -89,6 +90,8 @@ public class AuthenticationController : BaseApiController
             ? logoutContext?.ClientId
             : logoutContext?.ClientName;
         result.PostLogoutRedirectUri = logoutContext?.PostLogoutRedirectUri;
+        if (result.PostLogoutRedirectUri.IsNullOrEmpty())
+            result.PostLogoutRedirectUri = "http://localhost:4200/identity-guards/signout-callback#";
 
         if (User?.Identity.IsAuthenticated == true)
         {
@@ -111,8 +114,8 @@ public class AuthenticationController : BaseApiController
             //}
 
             // delete local authentication cookie
-            //await HttpContext.SignOutAsync();
-            //await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
+            await HttpContext.SignOutAsync();
+            // await HttpContext.SignOutAsync(IdentityServerConstants.DefaultCookieAuthenticationScheme);
 
             // TODO: asalhani: enable when ApplicationUser activicated with Identity Svc
             // var user = await _userManager.GetUserAsync(User);

@@ -118,4 +118,9 @@ export class AuthService {
     this.manager.signoutRedirect({'id_token_hint': this.user ? this.user.id_token : ''})
       .then(v => this.setIsLoggedIn(this.isLoggedInInternal()));
   }
+
+  public finishLogout = () => {
+    this.setIsLoggedIn(false);
+    return this.manager.signoutRedirectCallback();
+  };
 }

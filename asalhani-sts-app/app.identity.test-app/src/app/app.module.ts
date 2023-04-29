@@ -40,7 +40,7 @@ export function getConfigValuesForIdentityGurads(): IdentityGuardsSettings {
       redirect_uri: 'http://localhost:4200/#/identity-guards/auth-callback#',
       scope: 'openid profile companyApi',
       response_type: 'code',
-      post_logout_redirect_uri: 'http://localhost:4200',
+      post_logout_redirect_uri: 'http://localhost:4200/identity-guards/signout-callback#',
       automaticSilentRenew: true,
       silent_redirect_uri: 'http://localhost:4200/#/identity-guards/silent-refresh#',
 
