@@ -7,7 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using App.IdentityServer.Configuration;
+using App.IdentityServer.Migrations.IdentityServer.ApplicationDb;
+using App.IdentityServer.Models;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.AspNetCore.Identity;
 
 namespace App.IdentityServer
 {
@@ -22,7 +25,19 @@ namespace App.IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             var migrationAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString,
+                    sql => sql.MigrationsAssembly(migrationAssembly).MigrationsHistoryTable("__EFMigrationsHistory", IdentityServiceConstants.DatabaseSchemaName)));
 
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                {
+                    
+                })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+            
             services.AddIdentityServer(opt =>
                 {
                     //  restrict the lifetime of a cookie so that after this time, the refresh token api will not work and the user has to login again
@@ -38,6 +53,7 @@ namespace App.IdentityServer
                     opt.UserInteraction.LoginUrl = "http://localhost:4200/#/identity/login";
                     opt.UserInteraction.LogoutUrl = "http://localhost:4200/#/identity/logout";
                 })
+                .AddAspNetIdentity<ApplicationUser>()
                 .AddTestUsers(InMemoryConfig.GetUsers())
                 .AddInMemoryClients(InMemoryConfig.GetClients())
                 .AddInMemoryApiResources(InMemoryConfig.GetApiResources())

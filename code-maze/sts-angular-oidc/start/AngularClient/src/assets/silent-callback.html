@@ -15,7 +15,7 @@
     scope: "openid profile companyApi",
     response_type: "code"
   };
-  new Oidc.UserManager(idpSettings).signinSilentCallback()
+    new Oidc.UserManager(idpSettings).signinSilentCallback()
     .catch(error => {
       console.log(error);
     });
