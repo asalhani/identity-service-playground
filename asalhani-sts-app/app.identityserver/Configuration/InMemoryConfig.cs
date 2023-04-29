@@ -142,6 +142,12 @@ namespace App.IdentityServer.Configuration
                    RedirectUris = new List<string>{ "http://localhost:4200/#/identity-guards/auth-callback#", "http://localhost:4200/#/identity-guards/silent-refresh#" },
                    RequirePkce = true, // -- CHECK
                    AllowAccessTokensViaBrowser = true,
+                   AccessTokenLifetime = 3600,
+                   IdentityTokenLifetime = 300,
+                   AlwaysIncludeUserClaimsInIdToken = true,
+                   RefreshTokenUsage = TokenUsage.ReUse,
+                   UpdateAccessTokenClaimsOnRefresh = true,
+                   AllowOfflineAccess = true,
                    AllowedScopes =
                    {
                        IdentityServerConstants.StandardScopes.OpenId,
@@ -152,7 +158,6 @@ namespace App.IdentityServer.Configuration
                    RequireClientSecret = false,
                    PostLogoutRedirectUris = new List<string> { "http://localhost:4200/signout-callback", "http://localhost:4200" },
                    RequireConsent = false,
-                   AccessTokenLifetime = 600
                }
             };
     }

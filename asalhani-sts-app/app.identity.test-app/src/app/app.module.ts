@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {IdentityLibModule, IdentityUiSettings, IdentityGuardsModule, IdentityGuardsSettings} from "identty-lib";
 import { ProtectedComponent } from './protected/protected.component';
 import { HomeComponent } from './home/home.component';
+import {WebStorageStateStore} from "oidc-client";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ export function getConfigValuesForIdentityGurads(): IdentityGuardsSettings {
     enableConsoleLogging: true,
     postLoginRedirectUrl: '/protected',
     oidcSettings: {
+      userStore: new WebStorageStateStore({ store: window.localStorage }),
       authority: 'https://localhost:5005',
       client_id: 'angular-spa-client',
       redirect_uri: 'http://localhost:4200/#/identity-guards/auth-callback#',
