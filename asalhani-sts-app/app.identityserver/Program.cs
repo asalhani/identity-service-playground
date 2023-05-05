@@ -10,7 +10,8 @@ namespace App.IdentityServer
         {
             CreateHostBuilder(args)
                 .Build()
-                //.MigrateDatabase()
+                .MigrateDatabase()
+                .MigrateUsersAndRoles()
                 .Run();
         }
 

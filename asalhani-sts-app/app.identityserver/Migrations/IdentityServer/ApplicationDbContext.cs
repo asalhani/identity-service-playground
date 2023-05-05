@@ -3,7 +3,7 @@ using App.IdentityServer.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace App.IdentityServer.Migrations.IdentityServer.ApplicationDb;
+namespace App.IdentityServer.Migrations.IdentityServer;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {

@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using App.IdentityServer.Helpers;
+using App.IdentityServer.Models;
 using App.IdentityServer.Models.Dto;
 using IdentityServer4;
 using IdentityServer4.Events;
@@ -17,28 +18,28 @@ namespace App.IdentityServer.Api;
 [Route("authentication")]
 public class AuthenticationController : BaseApiController
 {
-    private readonly TestUserStore _users;
     private readonly IEventService _events;
     private readonly IIdentityServerInteractionService _interaction;
+    private readonly UserManager<ApplicationUser> _appUserManager;
 
-    public AuthenticationController(TestUserStore users, IEventService events,
-        IIdentityServerInteractionService interaction)
+    public AuthenticationController(IEventService events,
+        IIdentityServerInteractionService interaction, UserManager<ApplicationUser> appUserManager)
     {
-        _users = users;
         _events = events;
         _interaction = interaction;
+        _appUserManager = appUserManager;
     }
 
     [HttpPost("sign-in")]
     public async Task<ApiResultBase> SignIn([FromBody] SignInInfoInput model)
     {
-        var user = _users.FindByUsername(model.LoginName);
+        var user = await _appUserManager.FindByNameAsync(model.LoginName);
 
-        await _events.RaiseAsync(new UserLoginSuccessEvent(user.Username, user.SubjectId, user.Username));
+        await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id, user.UserName));
 
-        var isuser = new IdentityServerUser(user.SubjectId)
+        var isuser = new IdentityServerUser(user.Id)
         {
-            DisplayName = user.Username
+            DisplayName = user.UserName
         };
 
         AuthenticationProperties props = null;

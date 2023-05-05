@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Reflection;
 using App.IdentityServer.Configuration;
-using App.IdentityServer.Migrations.IdentityServer.ApplicationDb;
+using App.IdentityServer.Migrations.IdentityServer;
 using App.IdentityServer.Models;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Identity;
@@ -25,15 +25,21 @@ namespace App.IdentityServer
         public void ConfigureServices(IServiceCollection services)
         {
             var migrationAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
-            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            var connectionString = Configuration.GetConnectionString("sqlConnection");
             
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString,
-                    sql => sql.MigrationsAssembly(migrationAssembly).MigrationsHistoryTable("__EFMigrationsHistory", IdentityServiceConstants.DatabaseSchemaName)));
+                    sql => sql.MigrationsAssembly(migrationAssembly).MigrationsHistoryTable("__EFMigrationsHistory__AspnetIdentity", IdentityServiceConstants.DatabaseSchemaName)));
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
-                    
+                    options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
+                    options.Password.RequireUppercase = false;
+                    options.Password.RequireNonAlphanumeric = false;
+                    options.Password.RequiredLength = 0;
+                    options.Password.RequiredUniqueChars = 0;
+                    options.User.RequireUniqueEmail = false;
                 })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -54,23 +60,23 @@ namespace App.IdentityServer
                     opt.UserInteraction.LogoutUrl = "http://localhost:4200/#/identity/logout";
                 })
                 .AddAspNetIdentity<ApplicationUser>()
-                .AddTestUsers(InMemoryConfig.GetUsers())
+                //.AddTestUsers(InMemoryConfig.GetUsers())
                 .AddInMemoryClients(InMemoryConfig.GetClients())
                 .AddInMemoryApiResources(InMemoryConfig.GetApiResources())
                 .AddInMemoryApiScopes(InMemoryConfig.GetApiScopes())
                 .AddInMemoryIdentityResources(InMemoryConfig.GetIdentityResources())
                 .AddDeveloperSigningCredential() //not something we want to use in a production environment;
-                .AddProfileService<CustomProfileService>();
-                // .AddConfigurationStore(opt =>
-                //  {
-                //      opt.ConfigureDbContext = c => c.UseSqlServer(Configuration.GetConnectionString("sqlConnection"),
-                //          sql => sql.MigrationsAssembly(migrationAssembly));
-                //  })
-                // .AddOperationalStore(opt =>
-                // {
-                //     opt.ConfigureDbContext = o => o.UseSqlServer(Configuration.GetConnectionString("sqlConnection"),
-                //         sql => sql.MigrationsAssembly(migrationAssembly));
-                // });
+                .AddProfileService<CustomProfileService>()
+                .AddConfigurationStore(opt =>
+                 {
+                     opt.ConfigureDbContext = c => c.UseSqlServer(connectionString,
+                         sql => sql.MigrationsAssembly(migrationAssembly).MigrationsHistoryTable("__EFMigrationsHistory__Configuration"));
+                 })
+                .AddOperationalStore(opt =>
+                {
+                    opt.ConfigureDbContext = o => o.UseSqlServer(connectionString,
+                        sql => sql.MigrationsAssembly(migrationAssembly).MigrationsHistoryTable("__EFMigrationsHistory__PersistedGrant"));
+                });
 
             services.AddCors(p => p.AddPolicy("corsapp", builder =>
             {
